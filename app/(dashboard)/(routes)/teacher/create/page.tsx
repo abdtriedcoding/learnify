@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { createCourse } from "@/app/actions/createCourse";
 
 const FormSchema = z.object({
   title: z.string().min(1, {
@@ -33,9 +34,9 @@ const Page = () => {
 
   const { isSubmitting, isValid } = form.formState;
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    // Send it to database
-    console.log(data);
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    await createCourse(data);
+    form.reset();
   }
 
   return (
