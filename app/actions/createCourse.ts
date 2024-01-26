@@ -1,5 +1,6 @@
 "use server";
 
+import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { z } from "zod";
 
@@ -15,5 +16,11 @@ export async function createCourse(values: Inputs) {
   const { userId } = auth();
   if (!userId) return;
   const result = FormSchema.parse(values);
-  console.log(result);
+  const response = await db.course.create({
+    data: {
+      userId,
+      title: result.title,
+    },
+  });
+  return response;
 }

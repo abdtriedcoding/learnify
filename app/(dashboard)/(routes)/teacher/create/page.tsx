@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { createCourse } from "@/app/actions/createCourse";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   title: z.string().min(1, {
@@ -25,6 +26,8 @@ const FormSchema = z.object({
 });
 
 const Page = () => {
+  const router = useRouter();
+  
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -35,7 +38,8 @@ const Page = () => {
   const { isSubmitting, isValid } = form.formState;
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    await createCourse(data);
+    const response = await createCourse(data);
+    router.push(`/teacher/courses/${response?.id}`);
     form.reset();
   }
 
