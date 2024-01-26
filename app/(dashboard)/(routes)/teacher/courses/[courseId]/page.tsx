@@ -1,6 +1,8 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
+import { PencilIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import TitleForm from "./_components/title-form";
 
 const Page = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
@@ -20,10 +22,40 @@ const Page = async ({ params }: { params: { courseId: string } }) => {
     return redirect("/");
   }
 
+  const requiredFields = [
+    course.title,
+    course.description,
+    course.category,
+    course.imageUrl,
+    course.price,
+  ];
+
+  const totalFields = requiredFields.length;
+  const completedFields = requiredFields.filter(Boolean).length;
+
+  const completionText = `(${completedFields}/${totalFields})`;
+
   return (
     <>
-      courseId: {params.courseId}
-      course title: {course.title}
+      <div className="p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-y-2">
+            <h1 className="text-2xl font-medium">Course setup</h1>
+            <span className="text-sm text-slate-700">
+              Complete all fields {completionText}
+            </span>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <PencilIcon className="w-5 h-5" />
+              <h2 className="text-xl">Customize your course</h2>
+            </div>
+            <TitleForm initialData={course} courseId={course.id} />
+          </div>
+        </div>
+      </div>
     </>
   );
 };
