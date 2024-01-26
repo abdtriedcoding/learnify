@@ -19,16 +19,11 @@ import Link from "next/link";
 import { createCourse } from "@/app/actions/createCourse";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-
-const FormSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title is required",
-  }),
-});
+import { FormSchema } from "@/lib/validation";
 
 const Page = () => {
   const router = useRouter();
-  
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
