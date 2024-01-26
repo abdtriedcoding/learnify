@@ -9,3 +9,17 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Course {
+  id      String      @id @default(uuid())
+  userId   String   
+  title    String
+  description String?
+  category String?
+  imageUrl String?
+  price Float?
+  isPublished Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
