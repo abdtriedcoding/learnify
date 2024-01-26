@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { createCourse } from "@/app/actions/createCourse";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const FormSchema = z.object({
   title: z.string().min(1, {
@@ -40,6 +41,7 @@ const Page = () => {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const response = await createCourse(data);
     router.push(`/teacher/courses/${response?.id}`);
+    toast.success("Course created");
     form.reset();
   }
 
