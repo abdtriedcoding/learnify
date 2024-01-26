@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { updateCourse } from "@/app/actions/updateCourse";
 
 interface TitleFormProps {
   initialData: {
@@ -43,7 +44,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const { isSubmitting, isValid } = form.formState;
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
+    await updateCourse(data, courseId);
     toast.success("Course updated");
     toggleEdit();
     router.refresh();
