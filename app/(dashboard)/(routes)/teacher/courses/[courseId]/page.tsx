@@ -7,6 +7,7 @@ import DescriptionForm from "./_components/description-form";
 import ImageForm from "./_components/image-form";
 import CategoryForm from "./_components/category-form";
 import PriceForm from "./_components/price-form";
+import ChaptersForm from "./_components/chapters-form";
 
 const Page = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
@@ -20,6 +21,13 @@ const Page = async ({ params }: { params: { courseId: string } }) => {
       id: params.courseId,
       userId,
     },
+    include: {
+      chapters: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+    },
   });
 
   if (!course) {
@@ -32,6 +40,7 @@ const Page = async ({ params }: { params: { courseId: string } }) => {
     course.category,
     course.imageUrl,
     course.price,
+    course.chapters.some(chapter => chapter.isPublished),
   ];
 
   const totalFields = requiredFields.length;
@@ -64,11 +73,7 @@ const Page = async ({ params }: { params: { courseId: string } }) => {
           <div className="space-y-6">
             <div>
               <h2 className="text-xl">Course chapters</h2>
-              <p>TODO</p>
-              {/* <ChaptersForm
-                initialData={course}
-                courseId={course.id}
-              /> */}
+              <ChaptersForm initialData={course} courseId={course.id} />
             </div>
             <div>
               <h2 className="text-xl">Sell your course</h2>
