@@ -3,6 +3,7 @@
 import { db } from "@/lib/db";
 import { FormSchema } from "@/lib/validation";
 import { auth } from "@clerk/nextjs";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 type Inputs = z.infer<typeof FormSchema>;
@@ -17,5 +18,6 @@ export async function createCourse(values: Inputs) {
       title: result.title,
     },
   });
+  revalidatePath("/teacher/courses");
   return response;
 }

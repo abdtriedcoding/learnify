@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
+import { revalidatePath } from "next/cache";
 
 export async function deleteCourse(courseId: string) {
   const { userId } = auth();
@@ -21,4 +22,6 @@ export async function deleteCourse(courseId: string) {
       id: courseId,
     },
   });
+
+  revalidatePath("/teacher/courses");
 }
