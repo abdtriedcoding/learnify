@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { publishChapter } from "@/app/actions/publishChapter";
 import { unpublishChapter } from "@/app/actions/unpublishChapter";
+import { Trash } from "lucide-react";
+import { ConfirmModal } from "@/components/confirm-modal";
 
 interface ChapterActionsProps {
   disabled: boolean;
@@ -53,6 +55,11 @@ const ChapterActions = ({
       >
         {isPublished ? "Unpublish" : "Publish"}
       </Button>
+      <ConfirmModal onConfirm={()=>{}}>
+        <Button size="sm" disabled={isLoading}>
+          <Trash className="h-4 w-4" />
+        </Button>
+      </ConfirmModal>
     </div>
   );
 };
