@@ -6,6 +6,7 @@ import TitleForm from "./_components/title-form";
 import DescriptionForm from "./_components/description-form";
 import ImageForm from "./_components/image-form";
 import CategoryForm from "./_components/category-form";
+import PriceForm from "./_components/price-form";
 
 const Page = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
@@ -59,6 +60,20 @@ const Page = async ({ params }: { params: { courseId: string } }) => {
             <DescriptionForm initialData={course} courseId={course.id} />
             <ImageForm initialData={course} courseId={course.id} />
             <CategoryForm initialData={course} courseId={course.id} />
+          </div>
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl">Course chapters</h2>
+              <p>TODO</p>
+              {/* <ChaptersForm
+                initialData={course}
+                courseId={course.id}
+              /> */}
+            </div>
+            <div>
+              <h2 className="text-xl">Sell your course</h2>
+              <PriceForm initialData={course} courseId={course.id} />
+            </div>
           </div>
         </div>
       </div>
