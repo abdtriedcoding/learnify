@@ -10,12 +10,23 @@ type Inputs = z.infer<typeof FormSchema>;
 export async function addChapter(values: Inputs, courseId: string) {
   const { userId } = auth();
   if (!userId) return;
+
+  const courseOwner = await db.course.findUnique({
+    where: {
+      id: courseId,
+      userId: userId,
+    },
+  });
+
+  if (!courseOwner) {
+    return;
+  }
+
   const result = FormSchema.parse(values);
-  const response = await db.chapter.create({
+  await db.chapter.create({
     data: {
       title: result.title,
       courseId: courseId,
     },
   });
-  return response;
 }
