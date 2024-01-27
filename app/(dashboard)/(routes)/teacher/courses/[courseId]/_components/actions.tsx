@@ -9,6 +9,7 @@ import { ConfirmModal } from "@/components/confirm-modal";
 import { deleteCourse } from "@/app/actions/deleteCourse";
 import { publishCourse } from "@/app/actions/publishCourse";
 import { unpublishCourse } from "@/app/actions/unpublishCourse";
+import { useConfettiStore } from "@/hooks/use-confetti-store";
 
 interface ActionsProps {
   disabled: boolean;
@@ -18,6 +19,7 @@ interface ActionsProps {
 
 const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
   const router = useRouter();
+  const confetti = useConfettiStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
@@ -30,6 +32,7 @@ const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
       } else {
         await publishCourse(courseId);
         toast.success("Course published");
+        confetti.onOpen();
       }
 
       router.refresh();
