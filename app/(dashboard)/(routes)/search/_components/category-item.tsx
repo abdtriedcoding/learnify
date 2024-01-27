@@ -13,9 +13,9 @@ const CategoryItem = ({ label, icon: Icon }: CategoryItemProps) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentCategoryId = searchParams.get("categoryId");
+  const currentCategory = searchParams.get("category");
   const currentTitle = searchParams.get("title");
-  const isSelected = currentCategoryId === label;
+  const isSelected = currentCategory === label;
 
   const onClick = () => {
     const url = qs.stringifyUrl(
@@ -23,7 +23,7 @@ const CategoryItem = ({ label, icon: Icon }: CategoryItemProps) => {
         url: pathname,
         query: {
           title: currentTitle,
-          categoryId: isSelected ? null : label,
+          category: isSelected ? null : label,
         },
       },
       { skipNull: true, skipEmptyString: true }
