@@ -15,11 +15,15 @@ const SearchPage = async ({
     return redirect("/");
   }
 
-  const { category } = searchParams;
+  const { category, title } = searchParams;
 
   const courses = await db.course.findMany({
     where: {
       isPublished: true,
+      title: {
+        contains: title as string,
+        mode: "insensitive"
+      },
       category: category as string,
     },
     orderBy: {
