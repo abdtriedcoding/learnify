@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { updateCourse } from "@/app/actions/updateCourse";
+import { addChapter } from "@/app/actions/addChapter";
 
 interface ChaptersFormProps {
   initialData: Course & { chapters: Chapter[] };
@@ -48,7 +49,7 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
   const { isSubmitting, isValid } = form.formState;
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    // await updateCourse(data, courseId);
+    await addChapter(data, courseId);
     toggleCreating();
     router.refresh();
     form.reset();
