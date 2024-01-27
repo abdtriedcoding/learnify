@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import ChapterTitleForm from "./_components/chapter-title-form";
 import ChapterDescriptionForm from "./_components/chapter-description-form";
 import ChapterVideoForm from "./_components/chapter-video-form";
+import ChapterAccessForm from "./_components/chapter-access-form";
 
 const Page = async ({
   params,
@@ -74,11 +75,11 @@ const Page = async ({
             </div>
             <div>
               <h2 className="text-xl">Access Settings</h2>
-              {/* <ChapterAccessForm
+              <ChapterAccessForm
                 initialData={chapter}
                 courseId={params.courseId}
                 chapterId={params.chapterId}
-              /> */}
+              />
             </div>
           </div>
           <div>
