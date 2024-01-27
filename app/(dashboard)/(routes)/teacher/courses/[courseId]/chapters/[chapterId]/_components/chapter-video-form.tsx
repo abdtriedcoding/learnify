@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { Pencil, PlusCircle, Video } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Chapter } from "@prisma/client";
@@ -10,7 +10,7 @@ import { Chapter } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { updateChapter } from "@/app/actions/updateChapter";
-import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
 
 interface ChapterVideoFormProps {
   initialData: Chapter;
@@ -27,6 +27,11 @@ const ChapterVideoForm = ({
   courseId,
   chapterId,
 }: ChapterVideoFormProps) => {
+  const ReactPlayer = useMemo(
+    () => dynamic(() => import("react-player"), { ssr: false }),
+    []
+  );
+
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);

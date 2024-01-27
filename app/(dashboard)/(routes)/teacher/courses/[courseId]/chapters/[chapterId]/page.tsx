@@ -72,6 +72,14 @@ const Page = async ({
                 chapterId={params.chapterId}
               />
             </div>
+            <div>
+              <h2 className="text-xl">Access Settings</h2>
+              {/* <ChapterAccessForm
+                initialData={chapter}
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+              /> */}
+            </div>
           </div>
           <div>
             <h2 className="text-xl">Add a video</h2>
