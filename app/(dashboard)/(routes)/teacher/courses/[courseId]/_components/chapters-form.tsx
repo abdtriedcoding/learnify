@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { updateCourse } from "@/app/actions/updateCourse";
 import { addChapter } from "@/app/actions/addChapter";
+import ChaptersList from "./chapter-list";
 
 interface ChaptersFormProps {
   initialData: Course & { chapters: Chapter[] };
@@ -54,6 +55,10 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
     router.refresh();
     form.reset();
   }
+
+  const onEdit = (id: string) => {
+    router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+  };
 
   return (
     <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
@@ -106,7 +111,7 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
           )}
         >
           {!initialData.chapters.length && "No chapters"}
-          {/* Show Add Chapter List */}
+          <ChaptersList onEdit={onEdit} items={initialData.chapters || []} />
         </div>
       )}
     </div>
