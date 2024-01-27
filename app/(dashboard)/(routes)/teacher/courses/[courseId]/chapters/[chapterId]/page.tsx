@@ -7,6 +7,7 @@ import ChapterTitleForm from "./_components/chapter-title-form";
 import ChapterDescriptionForm from "./_components/chapter-description-form";
 import ChapterVideoForm from "./_components/chapter-video-form";
 import ChapterAccessForm from "./_components/chapter-access-form";
+import { Banner } from "@/components/banner";
 
 const Page = async ({
   params,
@@ -38,6 +39,12 @@ const Page = async ({
 
   return (
     <>
+      {!chapter.isPublished && (
+        <Banner
+          variant="warning"
+          label="This chapter is unpublished. It will not be visible in the course"
+        />
+      )}
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="w-full">
