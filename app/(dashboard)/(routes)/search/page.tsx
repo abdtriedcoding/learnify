@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import Categories from "./_components/categories";
 import SearchInput from "@/components/search-input";
+import CoursesList from "./_components/courses-list";
 
 const SearchPage = async ({
   searchParams,
@@ -22,9 +23,16 @@ const SearchPage = async ({
       isPublished: true,
       title: {
         contains: title as string,
-        mode: "insensitive"
+        mode: "insensitive",
       },
       category: category as string,
+    },
+    include: {
+      chapters: {
+        where: {
+          isPublished: true,
+        },
+      },
     },
     orderBy: {
       createdAt: "desc",
@@ -35,11 +43,12 @@ const SearchPage = async ({
 
   return (
     <>
-      <div className="px-6 pt-6 md:hidden md:mb-0 block">
+      <div className="px-4 pt-6 md:hidden md:mb-0 block">
         <SearchInput />
       </div>
-      <div className="p-6 space-y-4">
+      <div className="p-4 space-y-4">
         <Categories />
+        <CoursesList items={courses} />
       </div>
     </>
   );
