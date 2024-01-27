@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import ChapterTitleForm from "./_components/chapter-title-form";
 
 const Page = async ({
   params,
@@ -51,6 +52,18 @@ const Page = async ({
                   Complete all fields {completionText}
                 </span>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-xl">Customize your chapter</h2>
+              <ChapterTitleForm
+                initialData={chapter}
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+              />
             </div>
           </div>
         </div>
