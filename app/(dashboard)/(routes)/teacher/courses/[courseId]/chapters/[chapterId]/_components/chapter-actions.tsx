@@ -8,6 +8,7 @@ import { publishChapter } from "@/app/actions/publishChapter";
 import { unpublishChapter } from "@/app/actions/unpublishChapter";
 import { Trash } from "lucide-react";
 import { ConfirmModal } from "@/components/confirm-modal";
+import { deleteChapter } from "@/app/actions/deleteChapter";
 
 interface ChapterActionsProps {
   disabled: boolean;
@@ -45,6 +46,20 @@ const ChapterActions = ({
     }
   };
 
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      await deleteChapter(courseId, chapterId);
+      toast.success("Chapter deleted");
+      router.refresh();
+      router.push(`/teacher/courses/${courseId}`);
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex items-center gap-x-2">
       <Button
@@ -55,7 +70,7 @@ const ChapterActions = ({
       >
         {isPublished ? "Unpublish" : "Publish"}
       </Button>
-      <ConfirmModal onConfirm={()=>{}}>
+      <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>
           <Trash className="h-4 w-4" />
         </Button>
