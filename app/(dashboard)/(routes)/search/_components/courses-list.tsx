@@ -1,12 +1,13 @@
 import { Course } from "@prisma/client";
 import CourseCard from "./course-card";
 
-type CourseWithChapter = Course & {
+type CourseWithProgress = Course & {
   chapters: { id: string }[];
+  progress: number | null;
 };
 
 interface CoursesListProps {
-  items: CourseWithChapter[];
+  items: CourseWithProgress[];
 }
 
 const CoursesList = ({ items }: CoursesListProps) => {
@@ -21,6 +22,7 @@ const CoursesList = ({ items }: CoursesListProps) => {
             imageUrl={item.imageUrl!}
             chaptersLength={item.chapters.length}
             price={item.price!}
+            progress={item.progress!}
             category={item?.category!}
           />
         ))}

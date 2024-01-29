@@ -10,6 +10,7 @@ interface CourseCardProps {
   chaptersLength: number;
   price: number;
   category: string;
+  progress: number | null;
 }
 
 const CourseCard = ({
@@ -19,6 +20,7 @@ const CourseCard = ({
   chaptersLength,
   price,
   category,
+  progress,
 }: CourseCardProps) => {
   return (
     <Link href={`/courses/${id}`}>
@@ -33,15 +35,24 @@ const CourseCard = ({
           <p className="text-xs text-muted-foreground">{category}</p>
           <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs">
             <div className="flex items-center gap-x-1 text-slate-500">
-              <BookOpen className="w-5 h-5" />
+              <BookOpen className="w-5 h-5 text-sky-700" />
               <span>
                 {chaptersLength} {chaptersLength === 1 ? "Chapter" : "Chapters"}
               </span>
             </div>
           </div>
-          <p className="text-md md:text-sm font-medium text-slate-700">
-            {formatPrice(price)}
-          </p>
+          {progress !== null ? (
+            <div>TODO</div>
+          ) : (
+            // <CourseProgress
+            //   variant={progress === 100 ? "success" : "default"}
+            //   size="sm"
+            //   value={progress}
+            // />
+            <p className="text-md md:text-sm font-medium text-slate-700">
+              {formatPrice(price)}
+            </p>
+          )}
         </div>
       </div>
     </Link>
