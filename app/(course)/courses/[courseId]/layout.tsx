@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 import CourseSidebar from "./_components/course-sidebar";
+import CourseNavbar from "./_components/course-navbar";
 
 const CourseLayout = async ({
   children,
@@ -43,9 +44,9 @@ const CourseLayout = async ({
         <CourseSidebar course={course} />
       </div>
       <main className="flex-1 h-full overflow-y-auto">
-        {/* <div className="sticky top-0 left-0 w-full z-50">
-          <Navbar />
-        </div> */}
+        <div className="sticky top-0 left-0 w-full z-50">
+          <CourseNavbar course={course} />
+        </div>
         {children}
       </main>
     </div>
