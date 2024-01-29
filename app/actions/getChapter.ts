@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { Chapter } from "@prisma/client";
 
 interface GetChapterProps {
   userId: string;
@@ -7,7 +8,6 @@ interface GetChapterProps {
 }
 
 export const getChapter = async ({ courseId, chapterId, userId }: GetChapterProps) => {
-  // TODO check if user purchase this or not
 
   const purchase = await db.purchase.findUnique({
     where: {
@@ -50,13 +50,26 @@ export const getChapter = async ({ courseId, chapterId, userId }: GetChapterProp
   }
 
   // TODO automatically start new chapter when chapter is completed
+  let nextChapter: Chapter | null = null;
 
-  // TODO get user progress
+  nextChapter = await db.chapter.findFirst({
+    where: {
+      courseId: courseId,
+      isPublished: true,
+      createdAt: {
+        gt: chapter?.createdAt,
+      }
+    },
+    orderBy: {
+      createdAt: "asc",
+    }
+  });
 
   return {
     chapter,
     course,
     purchase,
-    userProgress
+    userProgress,
+    nextChapter
   };
 };

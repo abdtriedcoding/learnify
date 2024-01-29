@@ -20,17 +20,19 @@ const Page = async ({
     return redirect("/");
   }
 
-  const { chapter, course, purchase, userProgress } = await getChapter({
-    userId,
-    chapterId: params.chapterId,
-    courseId: params.courseId,
-  });
+  const { chapter, course, purchase, userProgress, nextChapter } =
+    await getChapter({
+      userId,
+      chapterId: params.chapterId,
+      courseId: params.courseId,
+    });
 
   if (!chapter || !course) {
     return redirect("/");
   }
 
   const isLocked = !chapter.isFree && !purchase;
+  const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
   return (
     <div>
@@ -45,7 +47,14 @@ const Page = async ({
       )}
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
-          <VideoPlayer videoUrl={chapter.videoUrl!} isLocked={isLocked} />
+          <VideoPlayer
+            chapterId={params.chapterId}
+            courseId={params.courseId}
+            videoUrl={chapter.videoUrl!}
+            isLocked={isLocked}
+            completeOnEnd={completeOnEnd}
+            nextChapterId={nextChapter?.id}
+          />
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
