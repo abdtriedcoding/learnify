@@ -1,12 +1,22 @@
 import { db } from "@/lib/db";
 
 interface GetChapterProps {
+  userId: string;
   courseId: string;
   chapterId: string;
 }
 
-export const getChapter = async ({ courseId, chapterId }: GetChapterProps) => {
+export const getChapter = async ({ courseId, chapterId, userId }: GetChapterProps) => {
   // TODO check if user purchase this or not
+
+  const purchase = await db.purchase.findUnique({
+    where: {
+      userId_courseId: {
+        userId,
+        courseId,
+      }
+    }
+  });
 
   const course = await db.course.findUnique({
     where: {
@@ -25,6 +35,16 @@ export const getChapter = async ({ courseId, chapterId }: GetChapterProps) => {
     },
   });
 
+  const userProgress = await db.userProgress.findUnique({
+    where: {
+      userId_chapterId: {
+        userId,
+        chapterId,
+      }
+    }
+  });
+
+
   if (!chapter || !course) {
     throw new Error("Chapter or course not found");
   }
@@ -36,5 +56,7 @@ export const getChapter = async ({ courseId, chapterId }: GetChapterProps) => {
   return {
     chapter,
     course,
+    purchase,
+    userProgress
   };
 };

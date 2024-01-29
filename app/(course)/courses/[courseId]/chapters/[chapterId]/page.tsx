@@ -19,7 +19,8 @@ const Page = async ({
     return redirect("/");
   }
 
-  const { chapter, course } = await getChapter({
+  const { chapter, course, purchase, userProgress } = await getChapter({
+    userId,
     chapterId: params.chapterId,
     courseId: params.courseId,
   });
@@ -28,10 +29,13 @@ const Page = async ({
     return redirect("/");
   }
 
-  const isLocked = !chapter.isFree;
+  const isLocked = !chapter.isFree && !purchase;
 
   return (
     <div>
+      {userProgress?.isCompleted && (
+        <Banner variant="success" label="You already completed this chapter." />
+      )}
       {isLocked && (
         <Banner
           variant="warning"
@@ -45,10 +49,20 @@ const Page = async ({
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
             <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
-            <CourseEnrollButton
-              courseId={params.courseId}
-              price={course.price!}
-            />
+            {purchase ? (
+              <div>TODO</div>
+            ) : (
+              // <CourseProgressButton
+              //   chapterId={params.chapterId}
+              //   courseId={params.courseId}
+              //   nextChapterId={nextChapter?.id}
+              //   isCompleted={!!userProgress?.isCompleted}
+              // />
+              <CourseEnrollButton
+                courseId={params.courseId}
+                price={course.price!}
+              />
+            )}
           </div>
           <Separator />
           <div>
