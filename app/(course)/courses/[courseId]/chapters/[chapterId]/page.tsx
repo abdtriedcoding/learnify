@@ -2,8 +2,11 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 import { Banner } from "@/components/banner";
+import { Separator } from "@/components/ui/separator";
 import { getChapter } from "@/app/actions/getChapter";
 import VideoPlayer from "./_components/video-player";
+import CourseEnrollButton from "./_components/course-enroll-button";
+import Preview from "@/components/preview";
 
 const Page = async ({
   params,
@@ -38,6 +41,19 @@ const Page = async ({
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
           <VideoPlayer videoUrl={chapter.videoUrl!} isLocked={isLocked} />
+        </div>
+        <div>
+          <div className="p-4 flex flex-col md:flex-row items-center justify-between">
+            <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
+            <CourseEnrollButton
+              courseId={params.courseId}
+              price={course.price!}
+            />
+          </div>
+          <Separator />
+          <div>
+            <Preview value={chapter.description!} />
+          </div>
         </div>
       </div>
     </div>
