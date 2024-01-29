@@ -18,6 +18,9 @@ const SearchPage = async ({
 
   const { category, title } = searchParams;
 
+  // TODO: Add user progress and payment status. Basiclly redesign this function.
+  // Also modify course list ui for adding progress.
+
   const courses = await db.course.findMany({
     where: {
       isPublished: true,
@@ -32,6 +35,9 @@ const SearchPage = async ({
         where: {
           isPublished: true,
         },
+        select:{
+          id: true,
+        }
       },
     },
     orderBy: {
