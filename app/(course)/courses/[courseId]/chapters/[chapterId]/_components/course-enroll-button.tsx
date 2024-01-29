@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -18,7 +19,9 @@ const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
     try {
       setIsLoading(true);
 
-      // TODO Stripe integeration
+      const response = await axios.post(`/api/checkout`, { courseId });
+
+      window.location.assign(response.data.url);
     } catch {
       toast.error("Something went wrong");
     } finally {
