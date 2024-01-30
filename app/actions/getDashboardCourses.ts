@@ -12,7 +12,7 @@ type DashboardCourses = {
   coursesInProgress: CourseWithProgress[];
 };
 
-export const getChapter = async ({
+export const getDashboardCourses = async ({
   userId,
 }: CourseWithProgress): Promise<DashboardCourses> => {
   const purchasedCourses = await db.purchase.findMany({
