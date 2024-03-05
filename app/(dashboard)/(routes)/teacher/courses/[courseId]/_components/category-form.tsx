@@ -3,11 +3,11 @@
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { Pencil, CheckIcon, ChevronDown } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Pencil, CheckIcon, ChevronDown } from "lucide-react";
 
 import {
   Command,
@@ -28,9 +28,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 
 import { Course } from "@prisma/client";
-import { useRouter } from "next/navigation";
 import { updateCourse } from "@/app/actions/updateCourse";
 
 interface CategoryFormProps {

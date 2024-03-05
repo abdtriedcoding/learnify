@@ -1,9 +1,8 @@
 "use client";
 
-import { Chapter } from "@prisma/client";
-import { Pencil } from "lucide-react";
-
 import { cn } from "@/lib/utils";
+import { Pencil } from "lucide-react";
+import { Chapter } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 
 interface ChaptersListProps {

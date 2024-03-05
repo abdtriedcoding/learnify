@@ -1,8 +1,9 @@
-import { getAnalytics } from "@/app/actions/getAnalytics";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import DataCard from "./_components/data-card";
+import { getAnalytics } from "@/app/actions/getAnalytics";
+
 import Charts from "./_components/chart";
+import DataCard from "./_components/data-card";
 
 const Page = async () => {
   const { userId } = auth();
@@ -12,7 +13,6 @@ const Page = async () => {
   }
 
   const { data, totalRevenue, totalSales } = await getAnalytics(userId);
-  console.log(data);
 
   return (
     <div className="p-6">

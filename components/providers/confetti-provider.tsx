@@ -1,7 +1,6 @@
 "use client";
 
 import ReactConfetti from "react-confetti";
-
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 
 export const ConfettiProvider = () => {
@@ -18,5 +17,5 @@ export const ConfettiProvider = () => {
         confetti.onClose();
       }}
     />
-  )
-}
+  );
+};

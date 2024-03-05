@@ -4,9 +4,10 @@ import { redirect } from "next/navigation";
 import { Banner } from "@/components/banner";
 import { Separator } from "@/components/ui/separator";
 import { getChapter } from "@/app/actions/getChapter";
+
+import Preview from "@/components/preview";
 import VideoPlayer from "./_components/video-player";
 import CourseEnrollButton from "./_components/course-enroll-button";
-import Preview from "@/components/preview";
 import CourseProgressButton from "./_components/course-progress-button";
 
 const Page = async ({

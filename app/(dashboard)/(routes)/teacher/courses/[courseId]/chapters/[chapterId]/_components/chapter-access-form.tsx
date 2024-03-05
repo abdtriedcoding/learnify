@@ -1,13 +1,13 @@
 "use client";
 
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Pencil } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Pencil } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { Chapter } from "@prisma/client";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   Form,
@@ -17,8 +17,9 @@ import {
   FormItem,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
+
+import { Chapter } from "@prisma/client";
 import { updateChapter } from "@/app/actions/updateChapter";
 
 interface ChapterAccessFormProps {
@@ -36,11 +37,10 @@ const ChapterAccessForm = ({
   courseId,
   chapterId,
 }: ChapterAccessFormProps) => {
+  const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
-
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

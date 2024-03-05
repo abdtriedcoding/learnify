@@ -12,9 +12,9 @@ const SearchInput = () => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value);
 
-  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const currentCategory = searchParams.get("category");
 

@@ -1,11 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Pencil } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Pencil } from "lucide-react";
+import { Course } from "@prisma/client";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormControl,
@@ -14,14 +17,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { Button } from "@/components/ui/button";
 import { updateCourse } from "@/app/actions/updateCourse";
 
 interface TitleFormProps {
-  initialData: {
-    title: string;
-  };
+  initialData: Course;
   courseId: string;
 }
 
@@ -38,7 +38,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: { title: initialData.title },
   });
 
   const { isSubmitting, isValid } = form.formState;

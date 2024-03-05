@@ -1,9 +1,10 @@
-import { getDashboardCourses } from "@/app/actions/getDashboardCourses";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import CoursesList from "../search/_components/courses-list";
-import InfoCard from "./_components/info-card";
 import { CheckCircle, Clock } from "lucide-react";
+
+import InfoCard from "./_components/info-card";
+import CoursesList from "../search/_components/courses-list";
+import { getDashboardCourses } from "@/app/actions/getDashboardCourses";
 
 const HomePage = async () => {
   const { userId } = auth();

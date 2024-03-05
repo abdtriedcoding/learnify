@@ -53,11 +53,7 @@ const Categories = () => {
   return (
     <div className="flex items-center gap-x-2 overflow-x-auto pb-2">
       {course_categories.map((item, index) => (
-        <CategoryItem
-          key={index}
-          label={item.label}
-          icon={item.icon}
-        />
+        <CategoryItem key={index} label={item.label} icon={item.icon} />
       ))}
     </div>
   );

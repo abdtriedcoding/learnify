@@ -1,16 +1,16 @@
 "use client";
 
 import * as z from "zod";
-import { Pencil, PlusCircle, Video } from "lucide-react";
-import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Chapter } from "@prisma/client";
+import { Pencil, PlusCircle, Video } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
+import { Chapter } from "@prisma/client";
 import { updateChapter } from "@/app/actions/updateChapter";
-import dynamic from "next/dynamic";
 
 interface ChapterVideoFormProps {
   initialData: Chapter;
@@ -32,11 +32,10 @@ const ChapterVideoForm = ({
     []
   );
 
+  const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
-
-  const router = useRouter();
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     await updateChapter(data, courseId, chapterId);

@@ -1,11 +1,12 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { Course } from "@prisma/client";
+import { formatPrice } from "@/lib/format";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
-import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,8 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { formatPrice } from "@/lib/format";
+import { Button } from "@/components/ui/button";
 
 export const columns: ColumnDef<Course>[] = [
   {

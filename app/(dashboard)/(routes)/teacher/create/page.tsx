@@ -1,10 +1,14 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import * as z from "zod";
+import Link from "next/link";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { FormSchema } from "@/lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormControl,
@@ -15,11 +19,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
 import { createCourse } from "@/app/actions/createCourse";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import { FormSchema } from "@/lib/validation";
 
 const Page = () => {
   const router = useRouter();

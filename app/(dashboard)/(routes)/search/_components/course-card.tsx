@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { BookOpen } from "lucide-react";
 import { formatPrice } from "@/lib/format";
 import CourseProgress from "@/components/course-progress";

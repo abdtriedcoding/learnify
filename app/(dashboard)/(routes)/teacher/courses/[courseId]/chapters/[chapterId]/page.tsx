@@ -1,14 +1,15 @@
+import Link from "next/link";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Banner } from "@/components/banner";
+
+import ChapterActions from "./_components/chapter-actions";
 import ChapterTitleForm from "./_components/chapter-title-form";
-import ChapterDescriptionForm from "./_components/chapter-description-form";
 import ChapterVideoForm from "./_components/chapter-video-form";
 import ChapterAccessForm from "./_components/chapter-access-form";
-import { Banner } from "@/components/banner";
-import ChapterActions from "./_components/chapter-actions";
+import ChapterDescriptionForm from "./_components/chapter-description-form";
 
 const Page = async ({
   params,

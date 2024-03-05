@@ -2,14 +2,15 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { PencilIcon } from "lucide-react";
 import { redirect } from "next/navigation";
-import TitleForm from "./_components/title-form";
-import DescriptionForm from "./_components/description-form";
-import ImageForm from "./_components/image-form";
-import CategoryForm from "./_components/category-form";
-import PriceForm from "./_components/price-form";
-import ChaptersForm from "./_components/chapters-form";
 import { Banner } from "@/components/banner";
+
 import Actions from "./_components/actions";
+import ImageForm from "./_components/image-form";
+import TitleForm from "./_components/title-form";
+import PriceForm from "./_components/price-form";
+import CategoryForm from "./_components/category-form";
+import ChaptersForm from "./_components/chapters-form";
+import DescriptionForm from "./_components/description-form";
 
 const Page = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
@@ -47,7 +48,6 @@ const Page = async ({ params }: { params: { courseId: string } }) => {
 
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
-
   const completionText = `(${completedFields}/${totalFields})`;
   const isComplete = requiredFields.every(Boolean);
 

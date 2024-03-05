@@ -1,12 +1,12 @@
 "use client";
 
 import * as z from "zod";
-import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { Course } from "@prisma/client";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
@@ -73,7 +73,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
           </div>
         ))}
       {isEditing && (
-        <div>
+        <>
           <FileUpload
             endpoint="courseImage"
             onChange={(url) => {
@@ -85,7 +85,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
           <div className="text-xs text-muted-foreground mt-4">
             16:9 aspect ratio recommended
           </div>
-        </div>
+        </>
       )}
     </div>
   );

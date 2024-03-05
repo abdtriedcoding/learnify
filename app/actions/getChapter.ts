@@ -7,15 +7,18 @@ interface GetChapterProps {
   chapterId: string;
 }
 
-export const getChapter = async ({ courseId, chapterId, userId }: GetChapterProps) => {
-
+export const getChapter = async ({
+  courseId,
+  chapterId,
+  userId,
+}: GetChapterProps) => {
   const purchase = await db.purchase.findUnique({
     where: {
       userId_courseId: {
         userId,
         courseId,
-      }
-    }
+      },
+    },
   });
 
   const course = await db.course.findUnique({
@@ -40,10 +43,9 @@ export const getChapter = async ({ courseId, chapterId, userId }: GetChapterProp
       userId_chapterId: {
         userId,
         chapterId,
-      }
-    }
+      },
+    },
   });
-
 
   if (!chapter || !course) {
     throw new Error("Chapter or course not found");
@@ -58,11 +60,11 @@ export const getChapter = async ({ courseId, chapterId, userId }: GetChapterProp
       isPublished: true,
       createdAt: {
         gt: chapter?.createdAt,
-      }
+      },
     },
     orderBy: {
       createdAt: "asc",
-    }
+    },
   });
 
   return {
@@ -70,6 +72,6 @@ export const getChapter = async ({ courseId, chapterId, userId }: GetChapterProp
     course,
     purchase,
     userProgress,
-    nextChapter
+    nextChapter,
   };
 };

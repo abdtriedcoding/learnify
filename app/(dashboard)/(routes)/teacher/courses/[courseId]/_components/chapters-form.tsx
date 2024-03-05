@@ -1,12 +1,12 @@
 "use client";
 
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { PlusCircle } from "lucide-react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Chapter, Course } from "@prisma/client";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   Form,
@@ -15,12 +15,12 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { updateCourse } from "@/app/actions/updateCourse";
-import { addChapter } from "@/app/actions/addChapter";
+import { Button } from "@/components/ui/button";
+
 import ChaptersList from "./chapter-list";
+import { Chapter, Course } from "@prisma/client";
+import { addChapter } from "@/app/actions/addChapter";
 
 interface ChaptersFormProps {
   initialData: Course & { chapters: Chapter[] };
