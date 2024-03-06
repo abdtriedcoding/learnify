@@ -1,9 +1,9 @@
 "use server";
 
-import { db } from "@/lib/db";
-import { FormSchema } from "@/lib/validation";
-import { auth } from "@clerk/nextjs";
 import { z } from "zod";
+import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs";
+import { FormSchema } from "@/lib/validation";
 
 type Inputs = z.infer<typeof FormSchema>;
 

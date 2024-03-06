@@ -27,4 +27,22 @@ export async function unpublishChapter(courseId: string, chapterId: string) {
       isPublished: false,
     },
   });
+
+  const publishedChaptersInCourse = await db.chapter.findMany({
+    where: {
+      courseId: courseId,
+      isPublished: true,
+    },
+  });
+
+  if (!publishedChaptersInCourse.length) {
+    await db.course.update({
+      where: {
+        id: courseId,
+      },
+      data: {
+        isPublished: false,
+      },
+    });
+  }
 }

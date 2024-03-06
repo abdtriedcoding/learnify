@@ -1,6 +1,5 @@
-import { Course } from "@prisma/client";
-
 import { db } from "@/lib/db";
+import { Course } from "@prisma/client";
 import { userProgress } from "./userProgress";
 
 type CourseWithProgress = Course & {

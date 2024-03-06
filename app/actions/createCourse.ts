@@ -1,10 +1,10 @@
 "use server";
 
+import { z } from "zod";
 import { db } from "@/lib/db";
-import { FormSchema } from "@/lib/validation";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
-import { z } from "zod";
+import { FormSchema } from "@/lib/validation";
 
 type Inputs = z.infer<typeof FormSchema>;
 
