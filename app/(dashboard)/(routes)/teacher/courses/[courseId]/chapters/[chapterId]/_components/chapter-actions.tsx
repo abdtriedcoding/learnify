@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { publishChapter } from "@/app/actions/publishChapter";
 import { unpublishChapter } from "@/app/actions/unpublishChapter";
-import { Trash } from "lucide-react";
 import { ConfirmModal } from "@/components/confirm-modal";
 import { deleteChapter } from "@/app/actions/deleteChapter";
 
@@ -27,37 +27,25 @@ const ChapterActions = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
-    try {
-      setIsLoading(true);
-
-      if (isPublished) {
-        await unpublishChapter(courseId, chapterId);
-        toast.success("Chapter unpublished");
-      } else {
-        await publishChapter(courseId, chapterId);
-        toast.success("Chapter published");
-      }
-
-      router.refresh();
-    } catch {
-      toast.error("Something went wrong");
-    } finally {
-      setIsLoading(false);
+    setIsLoading(true);
+    if (isPublished) {
+      await unpublishChapter(courseId, chapterId);
+      toast.success("Chapter unpublished");
+    } else {
+      await publishChapter(courseId, chapterId);
+      toast.success("Chapter published");
     }
+    router.refresh();
+    setIsLoading(false);
   };
 
   const onDelete = async () => {
-    try {
-      setIsLoading(true);
-      await deleteChapter(courseId, chapterId);
-      toast.success("Chapter deleted");
-      router.refresh();
-      router.push(`/teacher/courses/${courseId}`);
-    } catch {
-      toast.error("Something went wrong");
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    await deleteChapter(courseId, chapterId);
+    toast.success("Chapter deleted");
+    router.refresh();
+    router.push(`/teacher/courses/${courseId}`);
+    setIsLoading(false);
   };
 
   return (
