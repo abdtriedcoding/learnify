@@ -9,9 +9,9 @@ import { FormSchema } from "@/lib/validation";
 type Inputs = z.infer<typeof FormSchema>;
 
 export async function createCourse(values: Inputs) {
-  const { userId } = auth();
-  if (!userId) return;
   try {
+    const { userId } = auth();
+    if (!userId) return;
     const result = FormSchema.parse(values);
     const response = await db.course.create({
       data: {

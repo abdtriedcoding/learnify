@@ -12,7 +12,7 @@ import CategoryForm from "./_components/category-form";
 import ChaptersForm from "./_components/chapters-form";
 import DescriptionForm from "./_components/description-form";
 
-const Page = async ({ params }: { params: { courseId: string } }) => {
+const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
 
   if (!userId) {
@@ -97,4 +97,4 @@ const Page = async ({ params }: { params: { courseId: string } }) => {
   );
 };
 
-export default Page;
+export default CourseIdPage;
