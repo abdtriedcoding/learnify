@@ -46,7 +46,7 @@ const formSchema = z.object({
 
 const course_categories = [
   {
-    value: "computer Science",
+    value: "computerscience",
     label: "Computer Science",
   },
   {
@@ -192,16 +192,12 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
                 </FormItem>
               )}
             />
-            <div className="flex items-center gap-x-2">
-              <Button
-                disabled={
-                  !form.getValues("category") || !isValid || isSubmitting
-                }
-                type="submit"
-              >
-                Save
-              </Button>
-            </div>
+            <Button
+              disabled={!form.getValues("category") || !isValid || isSubmitting}
+              type="submit"
+            >
+              Save
+            </Button>
           </form>
         </Form>
       )}

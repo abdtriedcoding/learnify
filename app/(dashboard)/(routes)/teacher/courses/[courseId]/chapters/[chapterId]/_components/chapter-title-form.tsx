@@ -4,8 +4,10 @@ import * as z from "zod";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Pencil } from "lucide-react";
+import { Chapter } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { FormSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -20,16 +22,10 @@ import { Button } from "@/components/ui/button";
 import { updateChapter } from "@/app/actions/updateChapter";
 
 interface ChapterTitleFormProps {
-  initialData: {
-    title: string;
-  };
+  initialData: Chapter;
   courseId: string;
   chapterId: string;
 }
-
-const formSchema = z.object({
-  title: z.string().min(1),
-});
 
 const ChapterTitleForm = ({
   initialData,
@@ -42,14 +38,16 @@ const ChapterTitleForm = ({
 
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: initialData.title,
+    },
   });
 
   const { isSubmitting, isValid } = form.formState;
 
-  async function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     await updateChapter(data, courseId, chapterId);
     toast.success("Course updated");
     toggleEdit();

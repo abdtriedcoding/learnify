@@ -8,25 +8,29 @@ import { FormSchema } from "@/lib/validation";
 type Inputs = z.infer<typeof FormSchema>;
 
 export async function addChapter(values: Inputs, courseId: string) {
-  const { userId } = auth();
-  if (!userId) return;
+  try {
+    const { userId } = auth();
+    if (!userId) return;
 
-  const courseOwner = await db.course.findUnique({
-    where: {
-      id: courseId,
-      userId: userId,
-    },
-  });
+    const courseOwner = await db.course.findUnique({
+      where: {
+        id: courseId,
+        userId: userId,
+      },
+    });
 
-  if (!courseOwner) {
-    return;
+    if (!courseOwner) {
+      return;
+    }
+
+    const result = FormSchema.parse(values);
+    await db.chapter.create({
+      data: {
+        title: result.title,
+        courseId: courseId,
+      },
+    });
+  } catch (error) {
+    throw new Error("Something went wrong!");
   }
-
-  const result = FormSchema.parse(values);
-  await db.chapter.create({
-    data: {
-      title: result.title,
-      courseId: courseId,
-    },
-  });
 }

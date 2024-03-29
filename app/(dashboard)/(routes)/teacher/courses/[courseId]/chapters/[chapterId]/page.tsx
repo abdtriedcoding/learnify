@@ -11,7 +11,7 @@ import ChapterVideoForm from "./_components/chapter-video-form";
 import ChapterAccessForm from "./_components/chapter-access-form";
 import ChapterDescriptionForm from "./_components/chapter-description-form";
 
-const Page = async ({
+const ChapterIdPage = async ({
   params,
 }: {
   params: { courseId: string; chapterId: string };
@@ -113,4 +113,4 @@ const Page = async ({
   );
 };
 
-export default Page;
+export default ChapterIdPage;

@@ -81,11 +81,9 @@ const ChapterAccessForm = ({
             !initialData.isFree && "text-slate-500 italic"
           )}
         >
-          {initialData.isFree ? (
-            <>This chapter is free for preview.</>
-          ) : (
-            <>This chapter is not free.</>
-          )}
+          {initialData.isFree
+            ? "This chapter is free for preview."
+            : "This chapter is not free."}
         </p>
       )}
       {isEditing && (
@@ -114,11 +112,9 @@ const ChapterAccessForm = ({
                 </FormItem>
               )}
             />
-            <div className="flex items-center gap-x-2">
-              <Button disabled={!isValid || isSubmitting} type="submit">
-                Save
-              </Button>
-            </div>
+            <Button disabled={!isValid || isSubmitting} type="submit">
+              Save
+            </Button>
           </form>
         </Form>
       )}
