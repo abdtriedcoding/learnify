@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 
 import { createCourse } from "@/app/actions/createCourse";
 
-const Page = () => {
+const CreatePage = () => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -92,4 +92,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default CreatePage;
