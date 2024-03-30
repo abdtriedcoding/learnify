@@ -11,7 +11,6 @@ export const getBase64 = async (imgsrc: string) => {
     const { base64 } = await getPlaiceholder(buffer);
     return base64;
   } catch (error: unknown) {
-    //error handling
     return error;
   }
 };

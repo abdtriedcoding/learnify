@@ -7,23 +7,27 @@ export async function updateCourseProgress(
   chapterId: string,
   isCompleted: boolean
 ) {
-  const { userId } = auth();
-  if (!userId) return;
+  try {
+    const { userId } = auth();
+    if (!userId) return;
 
-  await db.userProgress.upsert({
-    where: {
-      userId_chapterId: {
+    await db.userProgress.upsert({
+      where: {
+        userId_chapterId: {
+          userId,
+          chapterId: chapterId,
+        },
+      },
+      update: {
+        isCompleted,
+      },
+      create: {
         userId,
         chapterId: chapterId,
+        isCompleted,
       },
-    },
-    update: {
-      isCompleted,
-    },
-    create: {
-      userId,
-      chapterId: chapterId,
-      isCompleted,
-    },
-  });
+    });
+  } catch (error) {
+    throw new Error("Something went wrong!");
+  }
 }

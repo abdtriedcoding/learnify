@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 
-const Page = async () => {
+const CoursePage = async () => {
   const { userId } = auth();
 
   if (!userId) {
@@ -27,4 +27,4 @@ const Page = async () => {
   );
 };
 
-export default Page;
+export default CoursePage;

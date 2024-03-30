@@ -10,7 +10,7 @@ import VideoPlayer from "./_components/video-player";
 import CourseEnrollButton from "./_components/course-enroll-button";
 import CourseProgressButton from "./_components/course-progress-button";
 
-const Page = async ({
+const ChapterIdPage = async ({
   params,
 }: {
   params: { courseId: string; chapterId: string };
@@ -83,4 +83,4 @@ const Page = async ({
   );
 };
 
-export default Page;
+export default ChapterIdPage;

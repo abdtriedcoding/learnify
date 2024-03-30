@@ -43,19 +43,15 @@ const VideoPlayer = ({
   };
 
   const onEnd = async () => {
-    try {
-      if (completeOnEnd) {
-        await updateCourseProgress(chapterId, true);
-        if (!nextChapterId) {
-          confetti.onOpen();
-        }
-        toast.success("Progress updated");
-        if (nextChapterId) {
-          router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
-        }
+    if (completeOnEnd) {
+      await updateCourseProgress(chapterId, true);
+      if (!nextChapterId) {
+        confetti.onOpen();
       }
-    } catch {
-      toast.error("Something went wrong");
+      toast.success("Progress updated");
+      if (nextChapterId) {
+        router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
+      }
     }
     router.refresh();
   };

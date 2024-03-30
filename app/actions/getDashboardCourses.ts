@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
-import { Chapter, Course } from "@prisma/client";
+import { Course } from "@prisma/client";
 import { userProgress } from "./userProgress";
 
 type CourseWithProgress = Course & {
-  chapters: Chapter[];
+  chapters: { id: string }[];
   progress: number | null;
 };
 
@@ -25,6 +25,9 @@ export const getDashboardCourses = async (
           chapters: {
             where: {
               isPublished: true,
+            },
+            select: {
+              id: true,
             },
           },
         },

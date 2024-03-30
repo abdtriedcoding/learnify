@@ -1,11 +1,11 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { constructMetadata } from "@/lib/utils";
 import { ConfettiProvider } from "@/components/providers/confetti-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Poppins({ subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata = constructMetadata();
 
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <ClerkProvider>
           <Toaster />
           <ConfettiProvider />

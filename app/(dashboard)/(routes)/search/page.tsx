@@ -13,7 +13,7 @@ interface PageProps {
   };
 }
 
-const Page = async ({ searchParams }: PageProps) => {
+const SearchPage = async ({ searchParams }: PageProps) => {
   const { userId } = auth();
 
   if (!userId) {
@@ -38,4 +38,4 @@ const Page = async ({ searchParams }: PageProps) => {
   );
 };
 
-export default Page;
+export default SearchPage;

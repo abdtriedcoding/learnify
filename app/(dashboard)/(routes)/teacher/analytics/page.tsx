@@ -5,7 +5,7 @@ import { getAnalytics } from "@/app/actions/getAnalytics";
 import Charts from "./_components/chart";
 import DataCard from "./_components/data-card";
 
-const Page = async () => {
+const AnalyticsPage = async () => {
   const { userId } = auth();
 
   if (!userId) {
@@ -25,4 +25,4 @@ const Page = async () => {
   );
 };
 
-export default Page;
+export default AnalyticsPage;

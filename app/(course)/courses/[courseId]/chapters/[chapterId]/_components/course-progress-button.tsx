@@ -1,9 +1,9 @@
 "use client";
 
-import { CheckCircle, XCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { CheckCircle, XCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { updateCourseProgress } from "@/app/actions/updateCourseProgress";
@@ -22,18 +22,11 @@ const CourseProgressButton = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
-    try {
-      setIsLoading(true);
-      await updateCourseProgress(chapterId, !isCompleted);
-
-      toast.success("Progress updated");
-      router.refresh();
-    } catch (error) {
-      toast.error("Something went wrong");
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    await updateCourseProgress(chapterId, !isCompleted);
+    toast.success("Progress updated");
+    router.refresh();
+    setIsLoading(false);
   };
 
   const Icon = isCompleted ? XCircle : CheckCircle;

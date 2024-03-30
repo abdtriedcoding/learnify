@@ -51,7 +51,6 @@ export const getChapter = async ({
     throw new Error("Chapter or course not found");
   }
 
-  // TODO automatically start new chapter when chapter is completed
   let nextChapter: Chapter | null = null;
 
   nextChapter = await db.chapter.findFirst({

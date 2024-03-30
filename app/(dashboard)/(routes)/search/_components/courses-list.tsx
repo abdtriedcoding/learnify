@@ -1,5 +1,5 @@
-import { Course } from "@prisma/client";
 import CourseCard from "./course-card";
+import { Course } from "@prisma/client";
 import { getBase64 } from "@/app/actions/getBlurImage";
 
 type CourseWithProgress = Course & {
