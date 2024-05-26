@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { PencilIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Banner } from "@/components/banner";

@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { CheckCircle, Clock } from "lucide-react";
 
@@ -10,7 +10,7 @@ const HomePage = async () => {
   const { userId } = auth();
 
   if (!userId) {
-    return redirect("/");
+    return redirect("/sign-in");
   }
 
   const { completedCourses, coursesInProgress } = await getDashboardCourses(
