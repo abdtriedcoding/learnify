@@ -1,14 +1,28 @@
+"use client";
+
 import qs from "query-string";
 import { cn } from "@/lib/utils";
-import { IconType } from "react-icons";
+import { CategoryItemProps } from "@/types/index";
+import { course_categories } from "@/constants/index";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-interface CategoryItemProps {
-  label: string;
-  icon: IconType;
-}
+const Categories = () => {
+  return (
+    <ScrollArea className="w-full whitespace-nowrap">
+      <div className="flex w-max space-x-4 pb-4">
+        {course_categories.map((item, index) => (
+          <CategoryItem key={index} label={item.label} icon={item.icon} />
+        ))}
+      </div>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
+  );
+};
 
-const CategoryItem = ({ label, icon: Icon }: CategoryItemProps) => {
+export default Categories;
+
+function CategoryItem({ label, icon: Icon }: CategoryItemProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -39,12 +53,9 @@ const CategoryItem = ({ label, icon: Icon }: CategoryItemProps) => {
         "py-2 px-3 text-sm border border-slate-200 rounded-full flex items-center gap-x-1 hover:border-sky-700 transition",
         isSelected && "border-sky-700 bg-sky-200/20 text-sky-800"
       )}
-      type="button"
     >
-      <Icon size={20} />
+      <Icon className="w-5 h-5" />
       <div className="truncate">{label}</div>
     </button>
   );
-};
-
-export default CategoryItem;
+}

@@ -9,7 +9,9 @@ const Navbar = () => {
     <div className="p-4 fixed z-50 w-full border-b flex justify-between items-center bg-white shadow-sm">
       <MobileSidebar />
       <Logo />
-      <SearchInput />
+      <div className="hidden md:block">
+        <SearchInput />
+      </div>
       <NavBarRoutes />
     </div>
   );

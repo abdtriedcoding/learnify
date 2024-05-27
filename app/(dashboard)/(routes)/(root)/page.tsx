@@ -1,38 +1,28 @@
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import { CheckCircle, Clock } from "lucide-react";
+import { HomePageProps } from "@/types/index";
+import Categories from "./_components/categories";
+import SearchInput from "@/components/search-input";
+import CoursesList from "./_components/courses-list";
+import { getCourses } from "@/app/actions/getCourses";
 
-import InfoCard from "./_components/info-card";
-import CoursesList from "../search/_components/courses-list";
-import { getDashboardCourses } from "@/app/actions/getDashboardCourses";
-
-const HomePage = async () => {
+const HomePage = async ({ searchParams }: HomePageProps) => {
   const { userId } = auth();
 
-  if (!userId) {
-    return redirect("/sign-in");
-  }
-
-  const { completedCourses, coursesInProgress } = await getDashboardCourses(
-    userId
-  );
+  const courses = await getCourses({
+    userId,
+    ...searchParams,
+  });
 
   return (
-    <div className="p-4 space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <InfoCard
-          icon={Clock}
-          label="In Progress"
-          numberOfItems={coursesInProgress.length}
-        />
-        <InfoCard
-          icon={CheckCircle}
-          label="Completed"
-          numberOfItems={completedCourses.length}
-        />
+    <>
+      <div className="px-6 pt-6 md:hidden md:mb-0 block">
+        <SearchInput />
       </div>
-      <CoursesList items={[...coursesInProgress, ...completedCourses]} />
-    </div>
+      <div className="p-6 space-y-4">
+        <Categories />
+        <CoursesList items={courses} />
+      </div>
+    </>
   );
 };
 

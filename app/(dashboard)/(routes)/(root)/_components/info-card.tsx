@@ -1,10 +1,4 @@
-import { LucideIcon } from "lucide-react";
-
-interface InfoCardProps {
-  numberOfItems: number;
-  label: string;
-  icon: LucideIcon;
-}
+import { InfoCardProps } from "@/types/index";
 
 const InfoCard = ({ icon: Icon, numberOfItems, label }: InfoCardProps) => {
   return (

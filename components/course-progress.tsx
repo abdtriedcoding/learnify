@@ -19,7 +19,7 @@ const sizeByVariant = {
 
 const CourseProgress = ({ value, variant, size }: CourseProgressProps) => {
   return (
-    <div>
+    <div className="w-full">
       <Progress className="h-2" value={value} variant={variant} />
       <p
         className={cn(

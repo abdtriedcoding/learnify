@@ -34,7 +34,7 @@ const SearchInput = () => {
   }, [debouncedValue, currentCategory, router, pathname]);
 
   return (
-    <div className="relative hidden md:block">
+    <div className="relative">
       <Search className="h-4 w-4 absolute top-[10px] left-3 text-slate-600" />
       <Input
         onChange={(e) => setValue(e.target.value)}

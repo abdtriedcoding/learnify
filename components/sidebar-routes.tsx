@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { SidebarItemProps } from "@/types";
 import { usePathname } from "next/navigation";
+import { SidebarItemProps } from "@/types/index";
 import { useSidebar } from "@/context/sidebar-context";
 import { buttonVariants } from "@/components/ui/button";
-import { guestRoutes, teacherRoutes } from "@/constants";
+import { guestRoutes, teacherRoutes } from "@/constants/index";
 
 const SidebarRoutes = () => {
   const pathname = usePathname();

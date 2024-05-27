@@ -1,5 +1,4 @@
-"use client";
-
+import { Compass, Layout, List, BarChart } from "lucide-react";
 import {
   FcEngineering,
   FcFilmReel,
@@ -9,9 +8,8 @@ import {
   FcSalesPerformance,
   FcSportsMode,
 } from "react-icons/fc";
-import CategoryItem from "./category-item";
 
-const course_categories = [
+export const course_categories = [
   {
     value: "computer Science",
     label: "Computer Science",
@@ -49,14 +47,28 @@ const course_categories = [
   },
 ];
 
-const Categories = () => {
-  return (
-    <div className="flex items-center gap-x-2 overflow-x-auto pb-2">
-      {course_categories.map((item, index) => (
-        <CategoryItem key={index} label={item.label} icon={item.icon} />
-      ))}
-    </div>
-  );
-};
+export const guestRoutes = [
+  {
+    icon: Compass,
+    label: "Browse",
+    href: "/",
+  },
+  {
+    icon: Layout,
+    label: "Dashboard",
+    href: "/dashboard",
+  },
+];
 
-export default Categories;
+export const teacherRoutes = [
+  {
+    icon: List,
+    label: "Courses",
+    href: "/teacher/courses",
+  },
+  {
+    icon: BarChart,
+    label: "Analytics",
+    href: "/teacher/analytics",
+  },
+];
