@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { LogOut } from "lucide-react";
-import { UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
+import { Loader, LogOut } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 
 const NavBarRoutes = () => {
   const pathname = usePathname();
@@ -28,7 +28,12 @@ const NavBarRoutes = () => {
             Teacher mode
           </Link>
         )}
-        <UserButton afterSignOutUrl="/" />
+        <ClerkLoading>
+          <Loader className="w-6 h-6 animate-spin" />
+        </ClerkLoading>
+        <ClerkLoaded>
+          <UserButton afterSignOutUrl="/" />
+        </ClerkLoaded>
       </div>
     </>
   );
