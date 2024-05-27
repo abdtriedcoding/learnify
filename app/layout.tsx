@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { constructMetadata } from "@/lib/utils";
 import { ConfettiProvider } from "@/components/providers/confetti-provider";
+import { SidebarProvider } from "@/context/sidebar-context";
 
 const font = Poppins({ subsets: ["latin"], weight: ["400", "500"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
         <ClerkProvider>
           <Toaster />
           <ConfettiProvider />
-          {children}
+          <SidebarProvider>{children}</SidebarProvider>
         </ClerkProvider>
       </body>
     </html>
