@@ -1,12 +1,12 @@
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import { Poppins } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { constructMetadata } from "@/lib/utils";
-import { ConfettiProvider } from "@/components/providers/confetti-provider";
+import { cn, constructMetadata } from "@/lib/utils";
 import { SidebarProvider } from "@/context/sidebar-context";
+import { ConfettiProvider } from "@/components/providers/confetti-provider";
 
-const font = Poppins({ subsets: ["latin"], weight: ["400", "500"] });
+const font = Open_Sans({ subsets: ["latin"], weight: ["500"] });
 
 export const metadata = constructMetadata();
 
@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={cn("antialiased", font.className)}>
         <ClerkProvider>
           <Toaster />
           <ConfettiProvider />
