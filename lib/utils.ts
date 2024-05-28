@@ -8,40 +8,62 @@ export function cn(...inputs: ClassValue[]) {
 
 export function constructMetadata({
   title = "Learnify",
-  description = "Empowering education on an intuitive platform, seamlessly sign up, purchase courses, and sell your content. User-friendly dashboards for tracking progress and income, making learning and teaching a breeze!",
+  description = "Learnify is an online learning and teaching marketplace with over 213,000 courses and 62 million students. Learn programming, marketing, data science and more.",
   image = "/thumbnail.png",
-  noIndex = false,
+  url = "https://learnifyy.vercel.app",
 }: {
   title?: string;
   description?: string;
   image?: string;
-  noIndex?: boolean;
+  url?: string;
 } = {}): Metadata {
   return {
-    title,
-    description,
+    title: {
+      default: title,
+      template: `%s - ${title}`,
+    },
+    metadataBase: new URL(url),
+    description: description,
+    keywords: [
+      "Online learning",
+      "Online courses",
+      "E-learning platform",
+      "Online teaching marketplace",
+      "Learn new skills",
+      "Online education",
+    ],
+    authors: [
+      {
+        name: "abdtriedcoding",
+        url: "https://abdullahsidd.vercel.app",
+      },
+    ],
+    creator: "abdtriedcoding",
     openGraph: {
-      title,
-      description,
+      type: "website",
+      locale: "en_US",
+      url: url,
+      title: title,
+      description: description,
+      siteName: title,
       images: [
         {
           url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: title,
+      description: description,
       images: [image],
       creator: "@abdtriedcoding",
     },
-    metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_URL}`),
-    ...(noIndex && {
-      robots: {
-        index: false,
-        follow: false,
-      },
-    }),
+    icons: {
+      icon: "/favicon.png",
+    },
   };
 }
