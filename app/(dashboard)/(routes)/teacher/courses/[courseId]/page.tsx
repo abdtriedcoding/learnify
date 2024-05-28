@@ -70,8 +70,8 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             isPublished={course.isPublished}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-16">
+          <div className="space-y-6">
             <div className="flex items-center gap-x-2">
               <PencilIcon className="w-5 h-5" />
               <h2 className="text-xl">Customize your course</h2>
@@ -82,14 +82,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <CategoryForm initialData={course} courseId={course.id} />
           </div>
           <div className="space-y-6">
-            <div>
-              <h2 className="text-xl">Course chapters</h2>
-              <ChaptersForm initialData={course} courseId={course.id} />
-            </div>
-            <div>
-              <h2 className="text-xl">Sell your course</h2>
-              <PriceForm initialData={course} courseId={course.id} />
-            </div>
+            <h2 className="text-xl">Course chapters</h2>
+            <ChaptersForm initialData={course} courseId={course.id} />
+            <h2 className="text-xl">Sell your course</h2>
+            <PriceForm initialData={course} courseId={course.id} />
           </div>
         </div>
       </div>

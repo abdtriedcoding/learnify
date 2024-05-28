@@ -8,8 +8,11 @@ import { Pencil } from "lucide-react";
 import { Course } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { DescriptionFormProps } from "@/types/index";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { updateCourse } from "@/app/actions/updateCourse";
 import {
   Form,
   FormControl,
@@ -17,32 +20,22 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { updateCourse } from "@/app/actions/updateCourse";
-
-interface DescriptionFormProps {
-  initialData: Course;
-  courseId: string;
-}
 
 const formSchema = z.object({
-  description: z.string().min(1, {
+  description: z.string().trim().min(1, {
     message: "Description is required",
   }),
 });
 
 const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEdit = () => setIsEditing((current) => !current);
-
   const router = useRouter();
+  const [isEditing, setIsEditing] = useState(false);
+  const toggleEdit = () => setIsEditing((current) => !current);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || "",
+      description: initialData.description ?? "",
     },
   });
 
@@ -57,7 +50,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Course description
         <Button onClick={toggleEdit} variant="ghost">
@@ -74,7 +67,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
       {!isEditing && (
         <p
           className={cn(
-            "text-sm mt-2",
+            "text-sm pt-2",
             !initialData.description && "text-slate-500 italic"
           )}
         >
@@ -85,7 +78,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
+            className="space-y-4 pt-2"
           >
             <FormField
               control={form.control}

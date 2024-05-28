@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/form";
 
 const FormSchema = z.object({
-  title: z.string().min(1, {
+  title: z.string().trim().min(1, {
     message: "Title is required",
   }),
 });
@@ -46,7 +46,7 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Course title
         <Button onClick={toggleEdit} variant="ghost">
@@ -60,12 +60,12 @@ const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
           )}
         </Button>
       </div>
-      {!isEditing && <p className="text-sm mt-2">{initialData.title}</p>}
+      {!isEditing && <p className="text-sm pt-2">{initialData.title}</p>}
       {isEditing && (
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
+            className="space-y-4 pt-2"
           >
             <FormField
               control={form.control}

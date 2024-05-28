@@ -4,18 +4,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { ActionsProps } from "@/types/index";
 import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "@/components/confirm-modal";
 import { deleteCourse } from "@/app/actions/deleteCourse";
 import { publishCourse } from "@/app/actions/publishCourse";
 import { unpublishCourse } from "@/app/actions/unpublishCourse";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
-
-interface ActionsProps {
-  disabled: boolean;
-  courseId: string;
-  isPublished: boolean;
-}
 
 const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
   const router = useRouter();

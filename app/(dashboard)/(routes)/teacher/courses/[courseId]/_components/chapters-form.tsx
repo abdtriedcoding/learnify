@@ -1,13 +1,17 @@
 "use client";
 
 import * as z from "zod";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { PlusCircle } from "lucide-react";
+import ChaptersList from "./chapter-list";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ChaptersFormProps } from "@/types/index";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { addChapter } from "@/app/actions/addChapter";
 import {
   Form,
   FormControl,
@@ -15,30 +19,17 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-
-import ChaptersList from "./chapter-list";
-import { Chapter, Course } from "@prisma/client";
-import { addChapter } from "@/app/actions/addChapter";
-
-interface ChaptersFormProps {
-  initialData: Course & { chapters: Chapter[] };
-  courseId: string;
-}
 
 const formSchema = z.object({
-  title: z.string().min(1),
+  title: z.string().trim().min(1),
 });
 
 const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
+  const router = useRouter();
   const [isCreating, setIsCreating] = useState(false);
-
   const toggleCreating = () => {
     setIsCreating((current) => !current);
   };
-
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -61,7 +52,7 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
   };
 
   return (
-    <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="relative border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Course chapters
         <Button onClick={toggleCreating} variant="ghost">
@@ -79,7 +70,7 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
+            className="space-y-4 pt-2"
           >
             <FormField
               control={form.control}
@@ -106,12 +97,14 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
       {!isCreating && (
         <div
           className={cn(
-            "text-sm mt-2",
+            "text-sm pt-2",
             !initialData.chapters.length && "text-slate-500 italic"
           )}
         >
           {!initialData.chapters.length && "No chapters"}
-          <ChaptersList onEdit={onEdit} items={initialData.chapters || []} />
+          {initialData.chapters.length > 0 && (
+            <ChaptersList onEdit={onEdit} items={initialData.chapters} />
+          )}
         </div>
       )}
     </div>

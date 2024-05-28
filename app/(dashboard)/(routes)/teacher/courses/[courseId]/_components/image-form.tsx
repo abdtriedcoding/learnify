@@ -4,31 +4,23 @@ import * as z from "zod";
 import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Course } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
-
+import { ImageFormProps } from "@/types/index";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { updateCourse } from "@/app/actions/updateCourse";
-
-interface ImageFormProps {
-  initialData: Course;
-  courseId: string;
-}
+import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 
 const formSchema = z.object({
-  imageUrl: z.string().min(1, {
+  imageUrl: z.string().trim().min(1, {
     message: "Image is required",
   }),
 });
 
 const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEdit = () => setIsEditing((current) => !current);
-
   const router = useRouter();
+  const [isEditing, setIsEditing] = useState(false);
+  const toggleEdit = () => setIsEditing((current) => !current);
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     await updateCourse(data, courseId);
@@ -38,7 +30,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Course image
         <Button onClick={toggleEdit} variant="ghost">
@@ -63,7 +55,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
             <ImageIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
-          <div className="relative aspect-video mt-2">
+          <div className="relative aspect-video pt-2">
             <Image
               alt="Upload"
               fill
@@ -82,7 +74,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
               }
             }}
           />
-          <div className="text-xs text-muted-foreground mt-4">
+          <div className="text-xs text-muted-foreground pt-4">
             16:9 aspect ratio recommended
           </div>
         </>

@@ -6,9 +6,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { CategoryFormProps } from "@/types/index";
+import { course_categories } from "@/constants/index";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { updateCourse } from "@/app/actions/updateCourse";
 import { Pencil, CheckIcon, ChevronDown } from "lucide-react";
-
 import {
   Command,
   CommandEmpty,
@@ -28,52 +31,12 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-
-import { Course } from "@prisma/client";
-import { updateCourse } from "@/app/actions/updateCourse";
-
-interface CategoryFormProps {
-  initialData: Course;
-  courseId: string;
-}
 
 const formSchema = z.object({
   category: z.string({
     required_error: "Please select a category.",
   }),
 });
-
-const course_categories = [
-  {
-    value: "computerscience",
-    label: "Computer Science",
-  },
-  {
-    value: "music",
-    label: "Music",
-  },
-  {
-    value: "fitness",
-    label: "Fitness",
-  },
-  {
-    value: "photography",
-    label: "Photography",
-  },
-  {
-    value: "accounting",
-    label: "Accounting",
-  },
-  {
-    value: "engineering",
-    label: "Engineering",
-  },
-  {
-    value: "filming",
-    label: "Filming",
-  },
-];
 
 const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
   const [open, setOpen] = useState(false);
@@ -85,7 +48,7 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      category: initialData?.category || "",
+      category: initialData.category ?? "",
     },
   });
 
@@ -99,7 +62,7 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Course category
         <Button onClick={toggleEdit} variant="ghost">
@@ -116,7 +79,7 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
       {!isEditing && (
         <p
           className={cn(
-            "text-sm mt-2",
+            "text-sm pt-2",
             !initialData.category && "text-slate-500 italic"
           )}
         >
@@ -127,7 +90,7 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
+            className="space-y-4 pt-2"
           >
             <FormField
               control={form.control}

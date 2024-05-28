@@ -1,6 +1,6 @@
-import { Course } from "@prisma/client";
 import { IconType } from "react-icons";
 import { LucideIcon } from "lucide-react";
+import { Chapter, Course } from "@prisma/client";
 
 export interface SidebarItemProps {
   icon: LucideIcon;
@@ -52,6 +52,42 @@ export interface InfoCardProps {
 }
 
 export interface TitleFormProps {
+  initialData: Course;
+  courseId: string;
+}
+
+export interface ActionsProps {
+  disabled: boolean;
+  courseId: string;
+  isPublished: boolean;
+}
+
+export interface DescriptionFormProps {
+  initialData: Course;
+  courseId: string;
+}
+
+export interface CategoryFormProps {
+  initialData: Course;
+  courseId: string;
+}
+
+export interface PriceFormProps {
+  initialData: Course;
+  courseId: string;
+}
+
+export interface ChaptersFormProps {
+  initialData: Course & { chapters: Chapter[] };
+  courseId: string;
+}
+
+export interface ChaptersListProps {
+  items: Chapter[];
+  onEdit: (id: string) => void;
+}
+
+export interface ImageFormProps {
   initialData: Course;
   courseId: string;
 }

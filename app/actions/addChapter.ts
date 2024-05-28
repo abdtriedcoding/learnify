@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 
 const FormSchema = z.object({
-  title: z.string().min(1, {
+  title: z.string().trim().min(1, {
     message: "Title is required",
   }),
 });
@@ -28,10 +28,15 @@ export async function addChapter(values: Inputs, courseId: string) {
       return;
     }
 
-    const result = FormSchema.parse(values);
+    const result = FormSchema.safeParse(values);
+
+    if (!result.success) {
+      throw new Error("Something went wrong!");
+    }
+
     await db.chapter.create({
       data: {
-        title: result.title,
+        title: result.data.title,
         courseId: courseId,
       },
     });

@@ -2,13 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
-import { Chapter } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
-
-interface ChaptersListProps {
-  items: Chapter[];
-  onEdit: (id: string) => void;
-}
+import { ChaptersListProps } from "@/types/index";
 
 const ChaptersList = ({ items, onEdit }: ChaptersListProps) => {
   return (

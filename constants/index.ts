@@ -11,7 +11,7 @@ import {
 
 export const course_categories = [
   {
-    value: "computer Science",
+    value: "computerscience",
     label: "Computer Science",
     icon: FcMultipleDevices,
   },
