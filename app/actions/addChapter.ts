@@ -3,7 +3,12 @@
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
-import { FormSchema } from "@/lib/validation";
+
+const FormSchema = z.object({
+  title: z.string().min(1, {
+    message: "Title is required",
+  }),
+});
 
 type Inputs = z.infer<typeof FormSchema>;
 

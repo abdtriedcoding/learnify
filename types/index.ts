@@ -50,3 +50,8 @@ export interface InfoCardProps {
   label: string;
   icon: LucideIcon;
 }
+
+export interface TitleFormProps {
+  initialData: Course;
+  courseId: string;
+}

@@ -4,12 +4,13 @@ import { z } from "zod";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Pencil } from "lucide-react";
-import { Course } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { FormSchema } from "@/lib/validation";
+import { Input } from "@/components/ui/input";
+import { TitleFormProps } from "@/types/index";
+import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { updateCourse } from "@/app/actions/updateCourse";
 import {
   Form,
   FormControl,
@@ -17,14 +18,12 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { updateCourse } from "@/app/actions/updateCourse";
 
-interface TitleFormProps {
-  initialData: Course;
-  courseId: string;
-}
+const FormSchema = z.object({
+  title: z.string().min(1, {
+    message: "Title is required",
+  }),
+});
 
 const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const router = useRouter();
