@@ -1,44 +1,23 @@
-import { auth } from "@clerk/nextjs/server";
-import { Chapter, Course, UserProgress } from "@prisma/client";
-import { redirect } from "next/navigation";
-
+import { CourseSidebarProps } from "@/types/index";
 import CourseSidebarItem from "./course-sidebar-item";
-import { db } from "@/lib/db";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import CourseProgress from "@/components/course-progress";
 
-interface CourseSidebarProps {
-  course: Course & {
-    chapters: (Chapter & {
-      userProgress: UserProgress[] | null;
-    })[];
-  };
-  progressCount: number;
-}
-
-export const CourseSidebar = async ({
+export const CourseSidebar = ({
   course,
   progressCount,
+  purchase,
 }: CourseSidebarProps) => {
-  const { userId } = auth();
-
-  if (!userId) {
-    return redirect("/");
-  }
-
-  const purchase = await db.purchase.findUnique({
-    where: {
-      userId_courseId: {
-        userId,
-        courseId: course.id,
-      },
-    },
-  });
-
   return (
-    <div className="h-full w-full border-r flex flex-col overflow-y-auto bg-white shadow-sm">
-      <div className="px-8 py-4 flex flex-col border-b">
-        <h1 className="font-semibold">{course.title}</h1>
-        {purchase && <CourseProgress variant="success" value={progressCount} />}
+    <ScrollArea className="h-[100vh]">
+      <div className="p-8 flex flex-col border-b space-y-4">
+        <h1 className="font-semibold line-clamp-2">{course.title}</h1>
+        {purchase && (
+          <CourseProgress
+            variant={progressCount === 100 ? "success" : "default"}
+            value={progressCount}
+          />
+        )}
       </div>
       <div className="flex flex-col w-full">
         {course.chapters.map((chapter) => (
@@ -52,7 +31,7 @@ export const CourseSidebar = async ({
           />
         ))}
       </div>
-    </div>
+    </ScrollArea>
   );
 };
 

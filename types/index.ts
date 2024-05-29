@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import { LucideIcon } from "lucide-react";
-import { Chapter, Course } from "@prisma/client";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { Chapter, Course, Purchase, UserProgress } from "@prisma/client";
 
 export interface SidebarItemProps {
   icon: LucideIcon;
@@ -144,3 +144,21 @@ export type DashboardCourses = {
   completedCourses: CourseWithProgress[];
   coursesInProgress: CourseWithProgress[];
 };
+
+export interface CourseSidebarProps {
+  course: Course & {
+    chapters: (Chapter & {
+      userProgress: UserProgress[];
+    })[];
+  };
+  progressCount: number;
+  purchase: Purchase | null;
+}
+
+export interface CourseSidebarItemProps {
+  label: string;
+  id: string;
+  isCompleted: boolean;
+  courseId: string;
+  isLocked: boolean;
+}

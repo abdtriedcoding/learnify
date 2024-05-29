@@ -1,9 +1,8 @@
+import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
-
-import { db } from "@/lib/db";
-import CourseSidebar from "./_components/course-sidebar";
 import CourseNavbar from "./_components/course-navbar";
+import CourseSidebar from "./_components/course-sidebar";
 import { userProgress } from "@/app/actions/userProgress";
 
 const CourseLayout = async ({
@@ -48,15 +47,30 @@ const CourseLayout = async ({
 
   const progressCount = await userProgress(userId, course.id);
 
+  const purchase = await db.purchase.findUnique({
+    where: {
+      userId_courseId: {
+        userId,
+        courseId: course.id,
+      },
+    },
+  });
+
   return (
-    <div className="h-full flex">
-      <div className="hidden md:flex h-full w-80">
-        <CourseSidebar course={course} progressCount={progressCount} />
-      </div>
-      <main className="flex-1 h-full overflow-y-auto">
-        <div className="sticky top-0 left-0 w-full z-50">
-          <CourseNavbar course={course} progressCount={progressCount} />
-        </div>
+    <div className="min-h-screen flex">
+      <aside className="fixed inset-y-0 z-40 bg-white h-[100vh] w-72 border-r-2 hidden md:block">
+        <CourseSidebar
+          course={course}
+          progressCount={progressCount}
+          purchase={purchase}
+        />
+      </aside>
+      <main className="flex-1 overflow-y-auto md:ml-72">
+        <CourseNavbar
+          course={course}
+          progressCount={progressCount}
+          purchase={purchase}
+        />
         {children}
       </main>
     </div>

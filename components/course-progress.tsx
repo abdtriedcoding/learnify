@@ -23,7 +23,7 @@ const CourseProgress = ({ value, variant, size }: CourseProgressProps) => {
       <Progress className="h-2" value={value} variant={variant} />
       <p
         className={cn(
-          "font-medium mt-2 text-sky-700",
+          "font-medium pt-2 text-emerald-700 text-sm",
           colorByVariant[variant || "default"],
           sizeByVariant[size || "default"]
         )}

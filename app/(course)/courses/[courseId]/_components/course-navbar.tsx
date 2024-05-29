@@ -1,21 +1,22 @@
+import { CourseSidebarProps } from "@/types/index";
 import NavBarRoutes from "@/components/navbar-routes";
 import CourseMobileSidebar from "./course-mobile-sidebar";
-import { Chapter, Course, UserProgress } from "@prisma/client";
 
-interface CourseNavbarProps {
-  course: Course & {
-    chapters: (Chapter & {
-      userProgress: UserProgress[] | null;
-    })[];
-  };
-  progressCount: number;
-}
-
-const CourseNavbar = ({ course, progressCount }: CourseNavbarProps) => {
+const CourseNavbar = ({
+  course,
+  progressCount,
+  purchase,
+}: CourseSidebarProps) => {
   return (
-    <div className="p-4 border-b h-full flex items-center bg-white shadow-sm">
-      <CourseMobileSidebar course={course} progressCount={progressCount} />
-      <NavBarRoutes />
+    <div className="p-4 fixed z-50 w-full border-b flex items-center bg-white shadow-sm">
+      <CourseMobileSidebar
+        course={course}
+        progressCount={progressCount}
+        purchase={purchase}
+      />
+      <div className="justify-end ml-auto md:w-[25rem]">
+        <NavBarRoutes />
+      </div>
     </div>
   );
 };
