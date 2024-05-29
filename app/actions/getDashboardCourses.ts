@@ -1,16 +1,6 @@
 import { db } from "@/lib/db";
-import { Course } from "@prisma/client";
 import { userProgress } from "./userProgress";
-
-type CourseWithProgress = Course & {
-  chapters: { id: string }[];
-  progress: number | null;
-};
-
-type DashboardCourses = {
-  completedCourses: CourseWithProgress[];
-  coursesInProgress: CourseWithProgress[];
-};
+import { CourseWithProgress, DashboardCourses } from "@/types/index";
 
 export const getDashboardCourses = async (
   userId: string

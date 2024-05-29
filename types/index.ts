@@ -131,11 +131,16 @@ export interface EditorProps {
 
 export type CourseWithProgress = Course & {
   chapters: { id: string }[];
-  purchases: { id: string }[];
+  purchases?: { id: string }[];
   progress: number | null;
 };
 
 export type GetCourses = {
   title?: string;
   category?: string;
+};
+
+export type DashboardCourses = {
+  completedCourses: CourseWithProgress[];
+  coursesInProgress: CourseWithProgress[];
 };
