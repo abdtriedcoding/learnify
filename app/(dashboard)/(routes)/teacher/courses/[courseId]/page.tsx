@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
-import { PencilIcon } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 import { Banner } from "@/components/banner";
 
 import Actions from "./_components/actions";
@@ -73,7 +73,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-16">
           <div className="space-y-6">
             <div className="flex items-center gap-x-2">
-              <PencilIcon className="w-5 h-5" />
+              <Pencil className="w-5 h-5" />
               <h2 className="text-xl">Customize your course</h2>
             </div>
             <TitleForm initialData={course} courseId={course.id} />

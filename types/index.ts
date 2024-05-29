@@ -1,6 +1,7 @@
 import { IconType } from "react-icons";
 import { LucideIcon } from "lucide-react";
 import { Chapter, Course } from "@prisma/client";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
 
 export interface SidebarItemProps {
   icon: LucideIcon;
@@ -90,4 +91,9 @@ export interface ChaptersListProps {
 export interface ImageFormProps {
   initialData: Course;
   courseId: string;
+}
+
+export interface FileUploadProps {
+  onChange: (url?: string) => void;
+  endpoint: keyof typeof ourFileRouter;
 }
