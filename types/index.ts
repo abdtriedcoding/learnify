@@ -26,11 +26,6 @@ export interface CategoryItemProps {
   icon: IconType;
 }
 
-export type CourseWithProgress = Course & {
-  chapters: { id: string }[];
-  progress: number | null;
-};
-
 export interface CoursesListProps {
   items: CourseWithProgress[];
 }
@@ -133,3 +128,14 @@ export interface EditorProps {
   onChange: (value: string) => void;
   value: string;
 }
+
+export type CourseWithProgress = Course & {
+  chapters: { id: string }[];
+  purchases: { id: string }[];
+  progress: number | null;
+};
+
+export type GetCourses = {
+  title?: string;
+  category?: string;
+};

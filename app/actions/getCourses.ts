@@ -1,32 +1,27 @@
 import { db } from "@/lib/db";
-import { Course } from "@prisma/client";
+import { auth } from "@clerk/nextjs/server";
 import { userProgress } from "./userProgress";
-
-type CourseWithProgress = Course & {
-  chapters: { id: string }[];
-  progress: number | null;
-};
-
-type GetCourses = {
-  userId: string | null;
-  title?: string;
-  category?: string;
-};
+import { CourseWithProgress, GetCourses } from "@/types/index";
 
 export const getCourses = async ({
-  userId,
   title,
   category,
 }: GetCourses): Promise<CourseWithProgress[]> => {
+  const { userId } = auth();
+
   try {
     const courses = await db.course.findMany({
       where: {
         isPublished: true,
-        title: {
-          contains: title as string,
-          mode: "insensitive",
-        },
-        category: category as string,
+        ...(title && {
+          title: {
+            contains: title,
+            mode: "insensitive",
+          },
+        }),
+        ...(category && {
+          category,
+        }),
       },
       include: {
         chapters: {
@@ -41,6 +36,9 @@ export const getCourses = async ({
           purchases: {
             where: {
               userId,
+            },
+            select: {
+              id: true,
             },
           },
         }),
@@ -75,7 +73,6 @@ export const getCourses = async ({
         };
       })
     );
-
     return coursesWithProgress;
   } catch (error) {
     return [];
