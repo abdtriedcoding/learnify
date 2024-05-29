@@ -7,8 +7,11 @@ import toast from "react-hot-toast";
 import { Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { ChapterAccessFormProps } from "@/types/index";
+import { updateChapter } from "@/app/actions/updateChapter";
 import {
   Form,
   FormControl,
@@ -16,17 +19,6 @@ import {
   FormField,
   FormItem,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-
-import { Chapter } from "@prisma/client";
-import { updateChapter } from "@/app/actions/updateChapter";
-
-interface ChapterAccessFormProps {
-  initialData: Chapter;
-  courseId: string;
-  chapterId: string;
-}
 
 const formSchema = z.object({
   isFree: z.boolean().default(false),
@@ -39,7 +31,6 @@ const ChapterAccessForm = ({
 }: ChapterAccessFormProps) => {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +51,7 @@ const ChapterAccessForm = ({
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Chapter access
         <Button onClick={toggleEdit} variant="ghost">
@@ -77,7 +68,7 @@ const ChapterAccessForm = ({
       {!isEditing && (
         <p
           className={cn(
-            "text-sm mt-2",
+            "text-sm pt-2",
             !initialData.isFree && "text-slate-500 italic"
           )}
         >
@@ -90,7 +81,7 @@ const ChapterAccessForm = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
+            className="space-y-4 pt-4"
           >
             <FormField
               control={form.control}

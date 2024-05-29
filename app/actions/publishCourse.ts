@@ -13,9 +13,20 @@ export async function publishCourse(courseId: string) {
         id: courseId,
         userId: userId,
       },
+      include: {
+        chapters: true,
+      },
     });
 
     if (!course) return;
+
+    const hasPublishedChapter = course.chapters.some(
+      (chapter) => chapter.isPublished
+    );
+
+    if (!hasPublishedChapter) {
+      throw new Error("Missing Form Fields!");
+    }
 
     await db.course.update({
       where: {

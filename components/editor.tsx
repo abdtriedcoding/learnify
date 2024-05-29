@@ -3,11 +3,7 @@
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-
-interface EditorProps {
-  onChange: (value: string) => void;
-  value: string;
-}
+import { EditorProps } from "@/types/index";
 
 const Editor = ({ onChange, value }: EditorProps) => {
   const ReactQuill = useMemo(

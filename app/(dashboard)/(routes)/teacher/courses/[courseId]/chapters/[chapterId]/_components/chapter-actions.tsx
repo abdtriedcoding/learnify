@@ -5,17 +5,11 @@ import toast from "react-hot-toast";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { publishChapter } from "@/app/actions/publishChapter";
-import { unpublishChapter } from "@/app/actions/unpublishChapter";
+import { ChapterActionsProps } from "@/types/index";
 import { ConfirmModal } from "@/components/confirm-modal";
 import { deleteChapter } from "@/app/actions/deleteChapter";
-
-interface ChapterActionsProps {
-  disabled: boolean;
-  courseId: string;
-  chapterId: string;
-  isPublished: boolean;
-}
+import { publishChapter } from "@/app/actions/publishChapter";
+import { unpublishChapter } from "@/app/actions/unpublishChapter";
 
 const ChapterActions = ({
   disabled,

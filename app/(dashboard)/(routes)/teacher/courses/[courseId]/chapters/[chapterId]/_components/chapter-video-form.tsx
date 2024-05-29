@@ -3,23 +3,16 @@
 import * as z from "zod";
 import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
-import { Chapter } from "@prisma/client";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Pencil, PlusCircle, Video } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
+import { ChapterVideoFormProps } from "@/types/index";
 import { FileUpload } from "@/components/file-upload";
+import { Pencil, PlusCircle, Video } from "lucide-react";
 import { updateChapter } from "@/app/actions/updateChapter";
 
-interface ChapterVideoFormProps {
-  initialData: Chapter;
-  courseId: string;
-  chapterId: string;
-}
-
 const formSchema = z.object({
-  videoUrl: z.string().min(1),
+  videoUrl: z.string().trim().min(1),
 });
 
 const ChapterVideoForm = ({
@@ -34,7 +27,6 @@ const ChapterVideoForm = ({
 
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-
   const toggleEdit = () => setIsEditing((current) => !current);
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
@@ -45,7 +37,7 @@ const ChapterVideoForm = ({
   }
 
   return (
-    <div className="mt-6 border bg-slate-100 rounded-md p-4">
+    <div className="border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
         Chapter video
         <Button onClick={toggleEdit} variant="ghost">
@@ -70,7 +62,7 @@ const ChapterVideoForm = ({
             <Video className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
-          <div className="relative aspect-video mt-2">
+          <div className="relative aspect-video pt-2">
             <ReactPlayer
               url={initialData.videoUrl}
               controls
@@ -89,13 +81,13 @@ const ChapterVideoForm = ({
               }
             }}
           />
-          <div className="text-xs text-muted-foreground mt-4">
+          <div className="text-xs text-muted-foreground pt-4">
             Upload this chapter&apos;s video
           </div>
         </div>
       )}
       {initialData.videoUrl && !isEditing && (
-        <div className="text-xs text-muted-foreground mt-2">
+        <div className="text-xs text-muted-foreground pt-2">
           Videos can take a few minutes to process. Refresh the page if video
           does not appear.
         </div>

@@ -97,3 +97,39 @@ export interface FileUploadProps {
   onChange: (url?: string) => void;
   endpoint: keyof typeof ourFileRouter;
 }
+
+export interface ChapterActionsProps {
+  disabled: boolean;
+  courseId: string;
+  chapterId: string;
+  isPublished: boolean;
+}
+
+export interface ChapterTitleFormProps {
+  initialData: Chapter;
+  courseId: string;
+  chapterId: string;
+}
+
+export interface ChapterDescriptionFormProps {
+  initialData: Chapter;
+  courseId: string;
+  chapterId: string;
+}
+
+export interface ChapterAccessFormProps {
+  initialData: Chapter;
+  courseId: string;
+  chapterId: string;
+}
+
+export interface ChapterVideoFormProps {
+  initialData: Chapter;
+  courseId: string;
+  chapterId: string;
+}
+
+export interface EditorProps {
+  onChange: (value: string) => void;
+  value: string;
+}
