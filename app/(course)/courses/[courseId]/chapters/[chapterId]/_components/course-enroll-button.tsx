@@ -3,14 +3,9 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 import { formatPrice } from "@/lib/format";
 import { Button } from "@/components/ui/button";
-
-interface CourseEnrollButtonProps {
-  price: number;
-  courseId: string;
-}
+import { CourseEnrollButtonProps } from "@/types/index";
 
 const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
   const [isLoading, setIsLoading] = useState(false);

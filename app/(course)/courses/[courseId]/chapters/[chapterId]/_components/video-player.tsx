@@ -5,17 +5,9 @@ import toast from "react-hot-toast";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
+import { VideoPlayerProps } from "@/types/index";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 import { updateCourseProgress } from "@/app/actions/updateCourseProgress";
-
-interface VideoPlayerProps {
-  courseId: string;
-  chapterId: string;
-  videoUrl: string;
-  nextChapterId?: string;
-  isLocked: boolean;
-  completeOnEnd: boolean;
-}
 
 const VideoPlayer = ({
   courseId,

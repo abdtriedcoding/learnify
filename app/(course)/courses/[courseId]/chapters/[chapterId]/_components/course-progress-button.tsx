@@ -3,16 +3,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { CheckCircle, XCircle } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
+import { CheckCircle, XCircle } from "lucide-react";
+import { CourseProgressButtonProps } from "@/types/index";
 import { updateCourseProgress } from "@/app/actions/updateCourseProgress";
-
-interface CourseProgressButtonProps {
-  chapterId: string;
-  courseId: string;
-  isCompleted?: boolean;
-}
 
 const CourseProgressButton = ({
   chapterId,

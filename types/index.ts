@@ -162,3 +162,28 @@ export interface CourseSidebarItemProps {
   courseId: string;
   isLocked: boolean;
 }
+
+export interface GetChapterProps {
+  userId: string;
+  courseId: string;
+  chapterId: string;
+}
+
+export interface VideoPlayerProps {
+  courseId: string;
+  chapterId: string;
+  videoUrl: string;
+  nextChapterId?: string;
+  isLocked: boolean;
+  completeOnEnd: boolean;
+}
+
+export interface CourseProgressButtonProps {
+  chapterId: string;
+  isCompleted: boolean;
+}
+
+export interface CourseEnrollButtonProps {
+  price: number;
+  courseId: string;
+}
