@@ -1,4 +1,6 @@
 import { db } from "@/lib/db";
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import CourseNavbar from "./_components/course-navbar";
@@ -71,7 +73,17 @@ const CourseLayout = async ({
           progressCount={progressCount}
           purchase={purchase}
         />
-        <main className="pt-[70px] bg-gray-50">{children}</main>
+        <main className="pt-[70px] bg-gray-50">
+          <Suspense
+            fallback={
+              <div className="min-h-screen flex items-center justify-center">
+                <Loader className="w-5 h-5 animate-spin" />
+              </div>
+            }
+          >
+            {children}
+          </Suspense>
+        </main>
       </main>
     </div>
   );

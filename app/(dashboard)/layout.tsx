@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
 
@@ -10,7 +12,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <Sidebar />
         </aside>
         <main className="flex-1 overflow-y-auto md:ml-72 pt-[70px] bg-gray-50 min-h-screen">
-          {children}
+          <Suspense
+            fallback={
+              <div className="min-h-screen flex items-center justify-center">
+                <Loader className="w-5 h-5 animate-spin" />
+              </div>
+            }
+          >
+            {children}
+          </Suspense>
         </main>
       </div>
     </div>
