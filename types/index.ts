@@ -135,15 +135,15 @@ export type CourseWithProgress = Course & {
   progress: number | null;
 };
 
-export type GetCourses = {
+export interface GetCourses {
   title?: string;
   category?: string;
-};
+}
 
-export type DashboardCourses = {
+export interface DashboardCourses {
   completedCourses: CourseWithProgress[];
   coursesInProgress: CourseWithProgress[];
-};
+}
 
 export interface CourseSidebarProps {
   course: Course & {
@@ -186,4 +186,10 @@ export interface CourseProgressButtonProps {
 export interface CourseEnrollButtonProps {
   price: number;
   courseId: string;
+}
+
+export interface DataCardProps {
+  value: number;
+  label: string;
+  shouldFormat?: boolean;
 }

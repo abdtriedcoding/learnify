@@ -1,11 +1,6 @@
 import { formatPrice } from "@/lib/format";
+import { DataCardProps } from "@/types/index";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-interface DataCardProps {
-  value: number;
-  label: string;
-  shouldFormat?: boolean;
-}
 
 const DataCard = ({ value, label, shouldFormat }: DataCardProps) => {
   return (
