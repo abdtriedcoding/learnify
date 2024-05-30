@@ -1,8 +1,13 @@
+import { Metadata } from "next";
 import Charts from "./_components/chart";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import DataCard from "./_components/data-card";
 import { getAnalytics } from "@/app/actions/getAnalytics";
+
+export const metadata: Metadata = {
+  title: "Analytics Page",
+};
 
 const AnalyticsPage = async () => {
   const { userId } = auth();

@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { Banner } from "@/components/banner";
@@ -8,6 +9,30 @@ import Preview from "@/components/preview";
 import VideoPlayer from "./_components/video-player";
 import CourseEnrollButton from "./_components/course-enroll-button";
 import CourseProgressButton from "./_components/course-progress-button";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { courseId: string; chapterId: string };
+}): Promise<Metadata> {
+  const { userId } = auth();
+
+  if (!userId) {
+    return {
+      title: "Unauthorized access",
+    };
+  }
+
+  const { chapter } = await getChapter({
+    userId,
+    chapterId: params.chapterId,
+    courseId: params.courseId,
+  });
+
+  return {
+    title: chapter.title,
+  };
+}
 
 const ChapterIdPage = async ({
   params,

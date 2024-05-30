@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
-import { ArrowLeft, Pencil } from "lucide-react";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 import { Banner } from "@/components/banner";
-
+import { ArrowLeft, Pencil } from "lucide-react";
 import ChapterActions from "./_components/chapter-actions";
 import ChapterTitleForm from "./_components/chapter-title-form";
 import ChapterVideoForm from "./_components/chapter-video-form";
 import ChapterAccessForm from "./_components/chapter-access-form";
 import ChapterDescriptionForm from "./_components/chapter-description-form";
+
+export const metadata: Metadata = {
+  title: "Chapter Creation Page",
+};
 
 const ChapterIdPage = async ({
   params,

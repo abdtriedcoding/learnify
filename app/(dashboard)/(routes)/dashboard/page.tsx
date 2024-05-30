@@ -1,9 +1,14 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { CheckCircle, Clock } from "lucide-react";
 import InfoCard from "../(root)/_components/info-card";
 import CoursesList from "../(root)/_components/courses-list";
 import { getDashboardCourses } from "@/app/actions/getDashboardCourses";
+
+export const metadata: Metadata = {
+  title: "Dashboard Page",
+};
 
 const DashboardPage = async () => {
   const { userId } = auth();

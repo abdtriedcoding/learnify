@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
+import { Metadata } from "next";
 import { Pencil } from "lucide-react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { Banner } from "@/components/banner";
-
 import Actions from "./_components/actions";
 import ImageForm from "./_components/image-form";
 import TitleForm from "./_components/title-form";
@@ -11,6 +11,10 @@ import PriceForm from "./_components/price-form";
 import CategoryForm from "./_components/category-form";
 import ChaptersForm from "./_components/chapters-form";
 import DescriptionForm from "./_components/description-form";
+
+export const metadata: Metadata = {
+  title: "Course Creation Page",
+};
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
