@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, XCircle } from "lucide-react";
+import { ArrowRight, XCircle } from "lucide-react";
 import { CourseProgressButtonProps } from "@/types/index";
 import { updateCourseProgress } from "@/app/actions/updateCourseProgress";
 
@@ -23,7 +23,7 @@ const CourseProgressButton = ({
     setIsLoading(false);
   };
 
-  const Icon = isCompleted ? XCircle : CheckCircle;
+  const Icon = isCompleted ? XCircle : ArrowRight;
 
   return (
     <Button
@@ -33,7 +33,7 @@ const CourseProgressButton = ({
       variant={isCompleted ? "outline" : "success"}
       className="w-full md:w-auto"
     >
-      {isCompleted ? "Not completed" : "Mark as complete"}
+      {isCompleted ? "Not completed" : "Complete and continue"}
       <Icon className="h-4 w-4 ml-2" />
     </Button>
   );

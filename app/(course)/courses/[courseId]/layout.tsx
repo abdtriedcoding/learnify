@@ -71,7 +71,7 @@ const CourseLayout = async ({
           progressCount={progressCount}
           purchase={purchase}
         />
-        {children}
+        <main className="pt-[70px] bg-gray-50">{children}</main>
       </main>
     </div>
   );

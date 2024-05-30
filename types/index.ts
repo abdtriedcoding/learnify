@@ -45,6 +45,7 @@ export interface InfoCardProps {
   numberOfItems: number;
   label: string;
   icon: LucideIcon;
+  color: string;
 }
 
 export interface TitleFormProps {

@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Banner } from "@/components/banner";
 import { Separator } from "@/components/ui/separator";
 import { getChapter } from "@/app/actions/getChapter";
+import { Card, CardHeader } from "@/components/ui/card";
 import Preview from "@/components/preview";
 import VideoPlayer from "./_components/video-player";
 import CourseEnrollButton from "./_components/course-enroll-button";
@@ -34,7 +35,7 @@ const ChapterIdPage = async ({
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
   return (
-    <div>
+    <>
       {userProgress?.isCompleted && (
         <Banner variant="success" label="You already completed this chapter." />
       )}
@@ -52,23 +53,29 @@ const ChapterIdPage = async ({
         completeOnEnd={completeOnEnd}
         nextChapterId={nextChapter?.id}
       />
-      <div className="p-4 flex flex-col md:flex-row items-center justify-between">
-        <h2 className="text-2xl font-semibold">{chapter.title}</h2>
-        {purchase ? (
-          <CourseProgressButton
-            chapterId={params.chapterId}
-            isCompleted={!!userProgress?.isCompleted}
-          />
-        ) : (
-          <CourseEnrollButton
-            courseId={params.courseId}
-            price={course.price!}
-          />
-        )}
-      </div>
+      <Card className="m-4">
+        <CardHeader>
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <h2 className="text-lg lg:text-2xl font-semibold pb-2 md:pb-0">
+              {chapter.title}
+            </h2>
+            {purchase ? (
+              <CourseProgressButton
+                chapterId={params.chapterId}
+                isCompleted={!!userProgress?.isCompleted}
+              />
+            ) : (
+              <CourseEnrollButton
+                courseId={params.courseId}
+                price={course.price!}
+              />
+            )}
+          </div>
+        </CardHeader>
+      </Card>
       <Separator />
       <Preview value={chapter.description!} />
-    </div>
+    </>
   );
 };
 

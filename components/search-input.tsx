@@ -34,12 +34,12 @@ const SearchInput = () => {
   }, [debouncedValue, currentCategory, router, pathname]);
 
   return (
-    <div className="relative">
-      <Search className="h-4 w-4 absolute top-[10px] left-3 text-slate-600" />
+    <div className="relative items-center">
+      <Search className="h-4 w-4 absolute top-[12px] left-3 text-slate-600" />
       <Input
         onChange={(e) => setValue(e.target.value)}
         value={value}
-        className="w-full md:w-[300px] pl-9 rounded-full bg-zinc-50 focus-visible:ring-zinc-200"
+        className="h-10 w-full md:w-[300px] focus-visible:ring-0 pl-9 lg:w-[500px] rounded-lg"
         placeholder="Search for a course"
       />
     </div>
