@@ -2,6 +2,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/react";
 import { cn, constructMetadata } from "@/lib/utils";
 import { SidebarProvider } from "@/context/sidebar-context";
 import { ConfettiProvider } from "@/components/providers/confetti-provider";
@@ -21,7 +22,10 @@ export default function RootLayout({
         <ClerkProvider>
           <Toaster />
           <ConfettiProvider />
-          <SidebarProvider>{children}</SidebarProvider>
+          <SidebarProvider>
+            {children}
+            <Analytics />
+          </SidebarProvider>
         </ClerkProvider>
       </body>
     </html>
