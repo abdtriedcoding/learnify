@@ -1,9 +1,14 @@
-# Learnify: Empowering education on an intuitive platform 🎓, seamlessly sign up, purchase courses, and sell your content 📚🚀. User-friendly dashboards for tracking progress and income, making learning and teaching a breeze! 💻💰
+<div align="center">
+    <h1 align="center">Learnify</h1>
+    <h5>Empowering education on an intuitive platform 🎓, seamlessly sign up, purchase courses, and sell your content 📚🚀. User-friendly dashboards for tracking progress and income, making learning and teaching a breeze.</h5>
+</div>
 
-![Copy of Copy of Copy of Copy of Fullstack Twitter Clone (9)](https://files.edgestore.dev/j26azsoyqh7n72m2/myPublicImages/_public/9577e193-7ee1-47d8-aa8c-1afae71681c3.png)
+<div align="center">
+  <a href="https://learnifyy.vercel.app">learnifyy.vercel.app</a>
+</div>
+<br/>
 
-
-This is a repository for Build an LMS Platform: Next.js 13, React, Stripe, Mux, Prisma, Tailwind, MySQL, Supabase, Uploadthings, etc.
+![Thumbnail](/public/thumbnail.png)
 
 Key Features:
 
@@ -21,11 +26,11 @@ Key Features:
 - Rich text editor for chapter description ✍️
 - Authentication using Clerk 🔐
 - ORM using Prisma 🛠️
-- MySQL database using Supabase 🌐
+- PostgreSQL database using Supabase 🌐
 
 ### Prerequisites
 
-**Node version 18.x.x**
+**Node version 20.x.x**
 
 ### Cloning the repository
 
@@ -45,10 +50,10 @@ npm i
 ```js
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
 NEXT_PUBLIC_APP_URL=
 
@@ -63,7 +68,7 @@ STRIPE_WEBHOOK_SECRET=
 
 ### Setup Prisma
 
-Add MySQL Database (I used Supabase)
+Add Database (I used Supabase)
 
 ```shell
 npx prisma generate
