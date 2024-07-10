@@ -1,37 +1,37 @@
-"use server";
+'use server'
 
-import { z } from "zod";
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
+import { z } from 'zod'
+import { db } from '@/lib/db'
+import { auth } from '@clerk/nextjs/server'
 
 const FormSchema = z.object({
   title: z.string().trim().min(1, {
-    message: "Title is required",
+    message: 'Title is required',
   }),
-});
+})
 
-type Inputs = z.infer<typeof FormSchema>;
+type Inputs = z.infer<typeof FormSchema>
 
 export async function addChapter(values: Inputs, courseId: string) {
   try {
-    const { userId } = auth();
-    if (!userId) return;
+    const { userId } = auth()
+    if (!userId) return
 
     const courseOwner = await db.course.findUnique({
       where: {
         id: courseId,
         userId: userId,
       },
-    });
+    })
 
     if (!courseOwner) {
-      return;
+      return
     }
 
-    const result = FormSchema.safeParse(values);
+    const result = FormSchema.safeParse(values)
 
     if (!result.success) {
-      throw new Error("Something went wrong!");
+      throw new Error('Something went wrong!')
     }
 
     await db.chapter.create({
@@ -39,8 +39,8 @@ export async function addChapter(values: Inputs, courseId: string) {
         title: result.data.title,
         courseId: courseId,
       },
-    });
+    })
   } catch (error) {
-    throw new Error("Something went wrong!");
+    throw new Error('Something went wrong!')
   }
 }

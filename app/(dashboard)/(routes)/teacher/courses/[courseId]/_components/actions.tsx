@@ -1,45 +1,45 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { Trash } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { ActionsProps } from "@/types/index";
-import { Button } from "@/components/ui/button";
-import { ConfirmModal } from "@/components/confirm-modal";
-import { deleteCourse } from "@/app/actions/deleteCourse";
-import { publishCourse } from "@/app/actions/publishCourse";
-import { unpublishCourse } from "@/app/actions/unpublishCourse";
-import { useConfettiStore } from "@/hooks/use-confetti-store";
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { Trash } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { ActionsProps } from '@/types/index'
+import { Button } from '@/components/ui/button'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { deleteCourse } from '@/app/actions/deleteCourse'
+import { publishCourse } from '@/app/actions/publishCourse'
+import { unpublishCourse } from '@/app/actions/unpublishCourse'
+import { useConfettiStore } from '@/hooks/use-confetti-store'
 
 const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
-  const router = useRouter();
-  const confetti = useConfettiStore();
-  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
+  const confetti = useConfettiStore()
+  const [isLoading, setIsLoading] = useState(false)
 
   const onClick = async () => {
-    setIsLoading(true);
+    setIsLoading(true)
     if (isPublished) {
-      await unpublishCourse(courseId);
-      toast.success("Course unpublished");
+      await unpublishCourse(courseId)
+      toast.success('Course unpublished')
     } else {
-      await publishCourse(courseId);
-      toast.success("Course published");
-      confetti.onOpen();
+      await publishCourse(courseId)
+      toast.success('Course published')
+      confetti.onOpen()
     }
 
-    router.refresh();
-    setIsLoading(false);
-  };
+    router.refresh()
+    setIsLoading(false)
+  }
 
   const onDelete = async () => {
-    setIsLoading(true);
-    await deleteCourse(courseId);
-    toast.success("Course deleted");
-    router.refresh();
-    router.push(`/teacher/courses`);
-    setIsLoading(false);
-  };
+    setIsLoading(true)
+    await deleteCourse(courseId)
+    toast.success('Course deleted')
+    router.refresh()
+    router.push(`/teacher/courses`)
+    setIsLoading(false)
+  }
 
   return (
     <div className="flex items-center gap-x-2">
@@ -49,7 +49,7 @@ const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
         variant="outline"
         size="sm"
       >
-        {isPublished ? "Unpublish" : "Publish"}
+        {isPublished ? 'Unpublish' : 'Publish'}
       </Button>
       <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>
@@ -57,7 +57,7 @@ const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
         </Button>
       </ConfirmModal>
     </div>
-  );
-};
+  )
+}
 
-export default Actions;
+export default Actions

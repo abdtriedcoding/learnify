@@ -1,76 +1,76 @@
-"use client";
+'use client'
 
-import { z } from "zod";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { CategoryFormProps } from "@/types/index";
-import { course_categories } from "@/constants/index";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { updateCourse } from "@/app/actions/updateCourse";
-import { Pencil, CheckIcon, ChevronDown } from "lucide-react";
+import { z } from 'zod'
+import { cn } from '@/lib/utils'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { CategoryFormProps } from '@/types/index'
+import { course_categories } from '@/constants/index'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { updateCourse } from '@/app/actions/updateCourse'
+import { Pencil, CheckIcon, ChevronDown } from 'lucide-react'
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "@/components/ui/command";
+} from '@/components/ui/command'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover'
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 
 const formSchema = z.object({
   category: z.string({
-    required_error: "Please select a category.",
+    required_error: 'Please select a category.',
   }),
-});
+})
 
 const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const router = useRouter();
-  const [isEditing, setIsEditing] = useState(false);
-  const toggleEdit = () => setIsEditing((current) => !current);
+  const router = useRouter()
+  const [isEditing, setIsEditing] = useState(false)
+  const toggleEdit = () => setIsEditing((current) => !current)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      category: initialData.category ?? "",
+      category: initialData.category ?? '',
     },
-  });
+  })
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting, isValid } = form.formState
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    await updateCourse(data, courseId);
-    toast.success("Course updated");
-    toggleEdit();
-    router.refresh();
+    await updateCourse(data, courseId)
+    toast.success('Course updated')
+    toggleEdit()
+    router.refresh()
   }
 
   return (
-    <div className="border bg-slate-100 rounded-md p-4">
-      <div className="font-medium flex items-center justify-between">
+    <div className="rounded-md border bg-slate-100 p-4">
+      <div className="flex items-center justify-between font-medium">
         Course category
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <>Cancel</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2" />
+              <Pencil className="mr-2 h-4 w-4" />
               Edit category
             </>
           )}
@@ -79,11 +79,11 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
       {!isEditing && (
         <p
           className={cn(
-            "text-sm pt-2",
-            !initialData.category && "text-slate-500 italic"
+            'pt-2 text-sm',
+            !initialData.category && 'italic text-slate-500'
           )}
         >
-          {initialData.category ?? "No category"}
+          {initialData.category ?? 'No category'}
         </p>
       )}
       {isEditing && (
@@ -105,15 +105,15 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
                           role="combobox"
                           aria-expanded={open}
                           className={cn(
-                            "w-full justify-between",
-                            !field.value && "text-muted-foreground"
+                            'w-full justify-between',
+                            !field.value && 'text-muted-foreground'
                           )}
                         >
                           {field.value
                             ? course_categories.find(
                                 (category) => category.label === field.value
                               )?.label
-                            : "Select category..."}
+                            : 'Select category...'}
                           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
                       </PopoverTrigger>
@@ -130,18 +130,18 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
                                 value={category.label}
                                 key={category.label}
                                 onSelect={() => {
-                                  form.setValue("category", category.label);
-                                  form.clearErrors("category");
-                                  setOpen(false);
+                                  form.setValue('category', category.label)
+                                  form.clearErrors('category')
+                                  setOpen(false)
                                 }}
                               >
                                 {category.label}
                                 <CheckIcon
                                   className={cn(
-                                    "ml-auto h-4 w-4",
+                                    'ml-auto h-4 w-4',
                                     field.value === category.label
-                                      ? "opacity-100"
-                                      : "opacity-0"
+                                      ? 'opacity-100'
+                                      : 'opacity-0'
                                   )}
                                 />
                               </CommandItem>
@@ -156,7 +156,7 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
               )}
             />
             <Button
-              disabled={!form.getValues("category") || !isValid || isSubmitting}
+              disabled={!form.getValues('category') || !isValid || isSubmitting}
               type="submit"
             >
               Save
@@ -165,7 +165,7 @@ const CategoryForm = ({ initialData, courseId }: CategoryFormProps) => {
         </Form>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CategoryForm;
+export default CategoryForm

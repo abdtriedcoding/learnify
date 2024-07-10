@@ -1,26 +1,26 @@
-import { db } from "@/lib/db";
-import { Metadata } from "next";
-import { Pencil } from "lucide-react";
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
-import { Banner } from "@/components/banner";
-import Actions from "./_components/actions";
-import ImageForm from "./_components/image-form";
-import TitleForm from "./_components/title-form";
-import PriceForm from "./_components/price-form";
-import CategoryForm from "./_components/category-form";
-import ChaptersForm from "./_components/chapters-form";
-import DescriptionForm from "./_components/description-form";
+import { db } from '@/lib/db'
+import { Metadata } from 'next'
+import { Book, Pencil } from 'lucide-react'
+import { redirect } from 'next/navigation'
+import { auth } from '@clerk/nextjs/server'
+import { Banner } from '@/components/banner'
+import Actions from './_components/actions'
+import ImageForm from './_components/image-form'
+import TitleForm from './_components/title-form'
+import PriceForm from './_components/price-form'
+import CategoryForm from './_components/category-form'
+import ChaptersForm from './_components/chapters-form'
+import DescriptionForm from './_components/description-form'
 
 export const metadata: Metadata = {
-  title: "Course Creation Page",
-};
+  title: 'Course Creation Page',
+}
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
-    return redirect("/");
+    return redirect('/sign-in')
   }
 
   const course = await db.course.findUnique({
@@ -31,14 +31,14 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     include: {
       chapters: {
         orderBy: {
-          createdAt: "asc",
+          createdAt: 'asc',
         },
       },
     },
-  });
+  })
 
   if (!course) {
-    return redirect("/");
+    return redirect('/')
   }
 
   const requiredFields = [
@@ -48,12 +48,12 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     course.imageUrl,
     course.price,
     course.chapters.some((chapter) => chapter.isPublished),
-  ];
+  ]
 
-  const totalFields = requiredFields.length;
-  const completedFields = requiredFields.filter(Boolean).length;
-  const completionText = `(${completedFields}/${totalFields})`;
-  const isComplete = requiredFields.every(Boolean);
+  const totalFields = requiredFields.length
+  const completedFields = requiredFields.filter(Boolean).length
+  const completionText = `(${completedFields}/${totalFields})`
+  const isComplete = requiredFields.every(Boolean)
 
   return (
     <>
@@ -74,10 +74,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             isPublished={course.isPublished}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-16">
+        <div className="grid grid-cols-1 gap-6 pt-16 md:grid-cols-2">
           <div className="space-y-6">
             <div className="flex items-center gap-x-2">
-              <Pencil className="w-5 h-5" />
+              <Pencil className="h-5 w-5" />
               <h2 className="text-xl">Customize your course</h2>
             </div>
             <TitleForm initialData={course} courseId={course.id} />
@@ -86,7 +86,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <CategoryForm initialData={course} courseId={course.id} />
           </div>
           <div className="space-y-6">
-            <h2 className="text-xl">Course chapters</h2>
+            <div className="flex items-center gap-x-2">
+              <Book className="h-5 w-5" />
+              <h2 className="text-xl">Course chapters</h2>
+            </div>
             <ChaptersForm initialData={course} courseId={course.id} />
             <h2 className="text-xl">Sell your course</h2>
             <PriceForm initialData={course} courseId={course.id} />
@@ -94,7 +97,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default CourseIdPage;
+export default CourseIdPage
