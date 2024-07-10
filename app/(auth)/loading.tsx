@@ -1,10 +1,10 @@
-import { Loader } from "lucide-react";
+import { Loader } from 'lucide-react'
 
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
   return (
-    <div className="min-h-screen items-center justify-center flex">
-      <Loader className="w-5 h-5 animate-spin" />
+    <div className="flex min-h-screen items-center justify-center">
+      <Loader className="h-5 w-5 animate-spin" />
     </div>
-  );
+  )
 }

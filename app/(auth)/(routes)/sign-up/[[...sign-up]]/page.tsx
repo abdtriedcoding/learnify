@@ -1,10 +1,10 @@
-import { Metadata } from "next";
-import { SignUp } from "@clerk/nextjs";
+import { Metadata } from 'next'
+import { SignUp } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
-  title: "SignUp Page",
-};
+  title: 'SignUp Page',
+}
 
-export default function Page() {
-  return <SignUp />;
+export default function SignUpPage() {
+  return <SignUp />
 }
