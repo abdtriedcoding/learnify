@@ -1,28 +1,28 @@
-"use client";
+'use client'
 
-import axios from "axios";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { formatPrice } from "@/lib/format";
-import { Button } from "@/components/ui/button";
-import { CourseEnrollButtonProps } from "@/types/index";
+import axios from 'axios'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { formatPrice } from '@/lib/format'
+import { Button } from '@/components/ui/button'
+import { CourseEnrollButtonProps } from '@/types/index'
 
 const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const onClick = async () => {
     try {
-      setIsLoading(true);
+      setIsLoading(true)
 
-      const response = await axios.post(`/api/checkout`, { courseId });
+      const response = await axios.post(`/api/checkout`, { courseId })
 
-      window.location.assign(response.data.url);
+      window.location.assign(response.data.url)
     } catch {
-      toast.error("Something went wrong");
+      toast.error('Something went wrong')
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <Button
@@ -33,7 +33,7 @@ const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
     >
       Enroll for {formatPrice(price)}
     </Button>
-  );
-};
+  )
+}
 
-export default CourseEnrollButton;
+export default CourseEnrollButton

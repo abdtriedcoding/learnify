@@ -1,48 +1,48 @@
-import { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
-import { Banner } from "@/components/banner";
-import { Separator } from "@/components/ui/separator";
-import { getChapter } from "@/app/actions/getChapter";
-import { Card, CardHeader } from "@/components/ui/card";
-import Preview from "@/components/preview";
-import VideoPlayer from "./_components/video-player";
-import CourseEnrollButton from "./_components/course-enroll-button";
-import CourseProgressButton from "./_components/course-progress-button";
+import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import { auth } from '@clerk/nextjs/server'
+import { Banner } from '@/components/banner'
+import { Separator } from '@/components/ui/separator'
+import { getChapter } from '@/app/actions/getChapter'
+import { Card, CardHeader } from '@/components/ui/card'
+import Preview from '@/components/preview'
+import VideoPlayer from './_components/video-player'
+import CourseEnrollButton from './_components/course-enroll-button'
+import CourseProgressButton from './_components/course-progress-button'
 
 export async function generateMetadata({
   params,
 }: {
-  params: { courseId: string; chapterId: string };
+  params: { courseId: string; chapterId: string }
 }): Promise<Metadata> {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
     return {
-      title: "Unauthorized access",
-    };
+      title: 'Unauthorized access',
+    }
   }
 
   const { chapter } = await getChapter({
     userId,
     chapterId: params.chapterId,
     courseId: params.courseId,
-  });
+  })
 
   return {
     title: chapter.title,
-  };
+  }
 }
 
 const ChapterIdPage = async ({
   params,
 }: {
-  params: { courseId: string; chapterId: string };
+  params: { courseId: string; chapterId: string }
 }) => {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
-    return redirect("/");
+    return redirect('/sign-in')
   }
 
   const { chapter, course, purchase, userProgress, nextChapter } =
@@ -50,14 +50,14 @@ const ChapterIdPage = async ({
       userId,
       chapterId: params.chapterId,
       courseId: params.courseId,
-    });
+    })
 
   if (!chapter || !course) {
-    return redirect("/");
+    return redirect('/')
   }
 
-  const isLocked = !chapter.isFree && !purchase;
-  const completeOnEnd = !!purchase && !userProgress?.isCompleted;
+  const isLocked = !chapter.isFree && !purchase
+  const completeOnEnd = !!purchase && !userProgress?.isCompleted
 
   return (
     <>
@@ -80,8 +80,8 @@ const ChapterIdPage = async ({
       />
       <Card className="m-4">
         <CardHeader>
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <h2 className="text-lg lg:text-2xl font-semibold pb-2 md:pb-0">
+          <div className="flex flex-col items-center justify-between md:flex-row">
+            <h2 className="pb-2 text-lg font-semibold md:pb-0 lg:text-2xl">
               {chapter.title}
             </h2>
             {purchase ? (
@@ -101,7 +101,7 @@ const ChapterIdPage = async ({
       <Separator />
       <Preview value={chapter.description!} />
     </>
-  );
-};
+  )
+}
 
-export default ChapterIdPage;
+export default ChapterIdPage

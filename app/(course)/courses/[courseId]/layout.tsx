@@ -1,23 +1,23 @@
-import { db } from "@/lib/db";
-import { Suspense } from "react";
-import { Loader } from "lucide-react";
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
-import CourseNavbar from "./_components/course-navbar";
-import CourseSidebar from "./_components/course-sidebar";
-import { userProgress } from "@/app/actions/userProgress";
+import { db } from '@/lib/db'
+import { Suspense } from 'react'
+import { Loader } from 'lucide-react'
+import { redirect } from 'next/navigation'
+import { auth } from '@clerk/nextjs/server'
+import CourseNavbar from './_components/course-navbar'
+import CourseSidebar from './_components/course-sidebar'
+import { userProgress } from '@/app/actions/userProgress'
 
 const CourseLayout = async ({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: { courseId: string };
+  children: React.ReactNode
+  params: { courseId: string }
 }) => {
-  const { userId } = auth();
+  const { userId } = auth()
 
   if (!userId) {
-    return redirect("/");
+    return redirect('/sign-in')
   }
 
   const course = await db.course.findUnique({
@@ -37,17 +37,17 @@ const CourseLayout = async ({
           },
         },
         orderBy: {
-          createdAt: "asc",
+          createdAt: 'asc',
         },
       },
     },
-  });
+  })
 
   if (!course) {
-    return redirect("/");
+    return redirect('/')
   }
 
-  const progressCount = await userProgress(userId, course.id);
+  const progressCount = await userProgress(userId, course.id)
 
   const purchase = await db.purchase.findUnique({
     where: {
@@ -56,11 +56,11 @@ const CourseLayout = async ({
         courseId: course.id,
       },
     },
-  });
+  })
 
   return (
-    <div className="min-h-screen flex">
-      <aside className="fixed inset-y-0 z-40 bg-white h-[100vh] w-72 border-r-2 hidden md:block">
+    <div className="flex min-h-screen">
+      <aside className="fixed inset-y-0 z-40 hidden h-[100vh] w-72 border-r-2 bg-white md:block">
         <CourseSidebar
           course={course}
           progressCount={progressCount}
@@ -73,11 +73,11 @@ const CourseLayout = async ({
           progressCount={progressCount}
           purchase={purchase}
         />
-        <main className="pt-[70px] bg-gray-50">
+        <main className="bg-gray-50 pt-[70px]">
           <Suspense
             fallback={
-              <div className="min-h-screen flex items-center justify-center">
-                <Loader className="w-5 h-5 animate-spin" />
+              <div className="flex min-h-screen items-center justify-center">
+                <Loader className="h-5 w-5 animate-spin" />
               </div>
             }
           >
@@ -86,7 +86,7 @@ const CourseLayout = async ({
         </main>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default CourseLayout;
+export default CourseLayout

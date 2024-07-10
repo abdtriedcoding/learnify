@@ -1,13 +1,13 @@
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
-import { userProgress } from "./userProgress";
-import { CourseWithProgress, GetCourses } from "@/types/index";
+import { db } from '@/lib/db'
+import { auth } from '@clerk/nextjs/server'
+import { userProgress } from './userProgress'
+import { CourseWithProgress, GetCourses } from '@/types/index'
 
 export const getCourses = async ({
   title,
   category,
 }: GetCourses): Promise<CourseWithProgress[]> => {
-  const { userId } = auth();
+  const { userId } = auth()
 
   try {
     const courses = await db.course.findMany({
@@ -16,7 +16,7 @@ export const getCourses = async ({
         ...(title && {
           title: {
             contains: title,
-            mode: "insensitive",
+            mode: 'insensitive',
           },
         }),
         ...(category && {
@@ -44,16 +44,16 @@ export const getCourses = async ({
         }),
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
-    });
+    })
 
     if (!userId) {
       // If no userId, return courses without progress
       return courses.map((course) => ({
         ...course,
         progress: null,
-      }));
+      }))
     }
 
     const coursesWithProgress: CourseWithProgress[] = await Promise.all(
@@ -62,19 +62,19 @@ export const getCourses = async ({
           return {
             ...course,
             progress: null,
-          };
+          }
         }
 
-        const progressPercentage = await userProgress(userId, course.id);
+        const progressPercentage = await userProgress(userId, course.id)
 
         return {
           ...course,
           progress: progressPercentage,
-        };
+        }
       })
-    );
-    return coursesWithProgress;
+    )
+    return coursesWithProgress
   } catch (error) {
-    return [];
+    return []
   }
-};
+}

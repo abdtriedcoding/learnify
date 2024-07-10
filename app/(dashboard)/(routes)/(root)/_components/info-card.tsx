@@ -1,4 +1,4 @@
-import { InfoCardProps } from "@/types/index";
+import { InfoCardProps } from '@/types/index'
 
 const InfoCard = ({
   icon: Icon,
@@ -7,16 +7,16 @@ const InfoCard = ({
   color,
 }: InfoCardProps) => {
   return (
-    <div className="border rounded-md flex items-center gap-x-2 p-3">
-      <Icon className={`w-5 h-5 ${color}`} />
+    <div className="flex items-center gap-x-2 rounded-md border p-3">
+      <Icon className={`h-5 w-5 ${color}`} />
       <div>
         <p className="font-medium">{label}</p>
-        <p className="text-gray-500 text-sm">
-          {numberOfItems} {numberOfItems === 1 ? "Course" : "Courses"}
+        <p className="text-sm text-gray-500">
+          {numberOfItems} {numberOfItems === 1 ? 'Course' : 'Courses'}
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InfoCard;
+export default InfoCard

@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { Card } from "@/components/ui/card";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { Card } from '@/components/ui/card'
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 
 interface ChartProps {
   data: {
-    name: string;
-    total: number;
-  }[];
+    name: string
+    total: number
+  }[]
 }
 
 const Chart = ({ data }: ChartProps) => {
@@ -33,7 +33,7 @@ const Chart = ({ data }: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
     </Card>
-  );
-};
+  )
+}
 
-export default Chart;
+export default Chart

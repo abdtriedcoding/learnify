@@ -1,6 +1,6 @@
-import { formatPrice } from "@/lib/format";
-import { DataCardProps } from "@/types/index";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatPrice } from '@/lib/format'
+import { DataCardProps } from '@/types/index'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const DataCard = ({ value, label, shouldFormat }: DataCardProps) => {
   return (
@@ -14,6 +14,6 @@ const DataCard = ({ value, label, shouldFormat }: DataCardProps) => {
         </div>
       </CardContent>
     </Card>
-  );
-};
-export default DataCard;
+  )
+}
+export default DataCard

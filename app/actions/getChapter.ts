@@ -1,5 +1,5 @@
-import { db } from "@/lib/db";
-import { GetChapterProps } from "@/types/index";
+import { db } from '@/lib/db'
+import { GetChapterProps } from '@/types/index'
 
 export const getChapter = async ({
   courseId,
@@ -15,17 +15,17 @@ export const getChapter = async ({
       select: {
         price: true,
       },
-    });
+    })
 
     const chapter = await db.chapter.findUnique({
       where: {
         id: chapterId,
         isPublished: true,
       },
-    });
+    })
 
     if (!chapter || !course) {
-      throw new Error("Chapter or course not found");
+      throw new Error('Chapter or course not found')
     }
 
     const purchase = await db.purchase.findUnique({
@@ -35,7 +35,7 @@ export const getChapter = async ({
           courseId,
         },
       },
-    });
+    })
 
     const userProgress = await db.userProgress.findUnique({
       where: {
@@ -44,7 +44,7 @@ export const getChapter = async ({
           chapterId,
         },
       },
-    });
+    })
 
     const nextChapter = await db.chapter.findFirst({
       where: {
@@ -55,9 +55,9 @@ export const getChapter = async ({
         },
       },
       orderBy: {
-        createdAt: "asc",
+        createdAt: 'asc',
       },
-    });
+    })
 
     return {
       chapter,
@@ -65,8 +65,8 @@ export const getChapter = async ({
       purchase,
       userProgress,
       nextChapter,
-    };
+    }
   } catch (error) {
-    throw new Error("Failed to fetch chapter data");
+    throw new Error('Failed to fetch chapter data')
   }
-};
+}

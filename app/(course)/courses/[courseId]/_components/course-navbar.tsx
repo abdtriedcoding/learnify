@@ -1,6 +1,6 @@
-import { CourseSidebarProps } from "@/types/index";
-import NavBarRoutes from "@/components/navbar-routes";
-import CourseMobileSidebar from "./course-mobile-sidebar";
+import { CourseSidebarProps } from '@/types/index'
+import NavBarRoutes from '@/components/navbar-routes'
+import CourseMobileSidebar from './course-mobile-sidebar'
 
 const CourseNavbar = ({
   course,
@@ -8,17 +8,17 @@ const CourseNavbar = ({
   purchase,
 }: CourseSidebarProps) => {
   return (
-    <div className="p-4 fixed z-50 w-full border-b flex items-center bg-white shadow-sm">
+    <div className="fixed z-50 flex w-full items-center border-b bg-white p-4 shadow-sm">
       <CourseMobileSidebar
         course={course}
         progressCount={progressCount}
         purchase={purchase}
       />
-      <div className="justify-end ml-auto md:w-[25rem]">
+      <div className="ml-auto justify-end md:w-[25rem]">
         <NavBarRoutes />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CourseNavbar;
+export default CourseNavbar

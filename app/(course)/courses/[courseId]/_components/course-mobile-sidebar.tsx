@@ -1,18 +1,18 @@
-"use client";
+'use client'
 
-import { SidebarOpen } from "lucide-react";
-import CourseSidebar from "./course-sidebar";
-import { Button } from "@/components/ui/button";
-import { CourseSidebarProps } from "@/types/index";
-import { useSidebar } from "@/context/sidebar-context";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { SidebarOpen } from 'lucide-react'
+import CourseSidebar from './course-sidebar'
+import { Button } from '@/components/ui/button'
+import { CourseSidebarProps } from '@/types/index'
+import { useSidebar } from '@/context/sidebar-context'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const CourseMobileSidebar = ({
   course,
   progressCount,
   purchase,
 }: CourseSidebarProps) => {
-  const { open, setOpen } = useSidebar();
+  const { open, setOpen } = useSidebar()
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -25,7 +25,7 @@ const CourseMobileSidebar = ({
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 bg-white">
+      <SheetContent side="left" className="bg-white p-0">
         <CourseSidebar
           course={course}
           progressCount={progressCount}
@@ -33,7 +33,7 @@ const CourseMobileSidebar = ({
         />
       </SheetContent>
     </Sheet>
-  );
-};
+  )
+}
 
-export default CourseMobileSidebar;
+export default CourseMobileSidebar

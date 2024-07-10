@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { db } from '@/lib/db'
 
 export const userProgress = async (
   userId: string,
@@ -13,9 +13,9 @@ export const userProgress = async (
       select: {
         id: true,
       },
-    });
+    })
 
-    const publishedChapterIds = publishedChapters.map((chapter) => chapter.id);
+    const publishedChapterIds = publishedChapters.map((chapter) => chapter.id)
 
     const validCompletedChapters = await db.userProgress.count({
       where: {
@@ -25,13 +25,13 @@ export const userProgress = async (
         },
         isCompleted: true,
       },
-    });
+    })
 
     const progressPercentage =
-      (validCompletedChapters / publishedChapterIds.length) * 100;
+      (validCompletedChapters / publishedChapterIds.length) * 100
 
-    return progressPercentage;
+    return progressPercentage
   } catch (error) {
-    return 0;
+    return 0
   }
-};
+}
