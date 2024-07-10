@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import * as z from "zod";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import toast from "react-hot-toast";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createCourse } from "@/app/actions/createCourse";
-import { Button, buttonVariants } from "@/components/ui/button";
+import * as z from 'zod'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import toast from 'react-hot-toast'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { Input } from '@/components/ui/input'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { createCourse } from '@/app/actions/createCourse'
+import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -18,35 +18,35 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 
 const FormSchema = z.object({
   title: z.string().trim().min(1, {
-    message: "Title is required",
+    message: 'Title is required',
   }),
-});
+})
 
 const CreatePage = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: "",
+      title: '',
     },
-  });
+  })
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting, isValid } = form.formState
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const response = await createCourse(data);
-    router.push(`/teacher/courses/${response?.id}`);
-    toast.success("Course created");
-    form.reset();
+    const response = await createCourse(data)
+    router.push(`/teacher/courses/${response?.id}`)
+    toast.success('Course created')
+    form.reset()
   }
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col py-28 p-4">
+    <div className="mx-auto flex max-w-3xl flex-col p-4 py-28">
       <h1 className="text-2xl">Name your course</h1>
       <p className="text-sm text-slate-600">
         What would you like to name your course? Don&apos;t worry, you can
@@ -77,7 +77,7 @@ const CreatePage = () => {
           <div className="flex items-center gap-x-2">
             <Link
               href="/"
-              className={cn(buttonVariants({ variant: "secondary" }))}
+              className={cn(buttonVariants({ variant: 'secondary' }))}
             >
               Cancel
             </Link>
@@ -88,7 +88,7 @@ const CreatePage = () => {
         </form>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default CreatePage;
+export default CreatePage

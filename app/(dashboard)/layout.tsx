@@ -1,21 +1,21 @@
-import { Suspense } from "react";
-import { Loader } from "lucide-react";
-import Navbar from "@/components/navbar";
-import Sidebar from "@/components/sidebar";
+import { Suspense } from 'react'
+import { Loader } from 'lucide-react'
+import Navbar from '@/components/navbar'
+import Sidebar from '@/components/sidebar'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen">
       <Navbar />
       <div className="flex">
-        <aside className="fixed inset-y-0 pt-[70px] z-40 bg-white h-[100vh] w-72 border-r-2 hidden md:block">
+        <aside className="fixed inset-y-0 z-40 hidden h-[100vh] w-72 border-r-2 bg-white pt-[70px] md:block">
           <Sidebar />
         </aside>
-        <main className="flex-1 overflow-y-auto md:ml-72 pt-[70px] bg-gray-50 min-h-screen">
+        <main className="min-h-screen flex-1 overflow-y-auto bg-gray-50 pt-[70px] md:ml-72">
           <Suspense
             fallback={
-              <div className="min-h-screen flex items-center justify-center">
-                <Loader className="w-5 h-5 animate-spin" />
+              <div className="flex min-h-screen items-center justify-center">
+                <Loader className="h-5 w-5 animate-spin" />
               </div>
             }
           >
@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardLayout;
+export default DashboardLayout

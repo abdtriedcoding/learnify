@@ -1,5 +1,5 @@
-import SidebarRoutes from "@/components/sidebar-routes";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import SidebarRoutes from '@/components/sidebar-routes'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const Sidebar = () => {
   return (
@@ -8,7 +8,7 @@ const Sidebar = () => {
         <SidebarRoutes />
       </div>
     </ScrollArea>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

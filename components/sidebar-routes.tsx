@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { SidebarItemProps } from "@/types/index";
-import { useSidebar } from "@/context/sidebar-context";
-import { buttonVariants } from "@/components/ui/button";
-import { guestRoutes, teacherRoutes } from "@/constants/index";
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
+import { SidebarItemProps } from '@/types/index'
+import { useSidebar } from '@/context/sidebar-context'
+import { buttonVariants } from '@/components/ui/button'
+import { guestRoutes, teacherRoutes } from '@/constants/index'
 
 const SidebarRoutes = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  const isTeacherPage = pathname?.includes("/teacher");
+  const isTeacherPage = pathname?.includes('/teacher')
 
-  const routes = isTeacherPage ? teacherRoutes : guestRoutes;
+  const routes = isTeacherPage ? teacherRoutes : guestRoutes
 
   return (
-    <div className="flex flex-col w-full space-y-1">
+    <div className="flex w-full flex-col space-y-1">
       {routes.map((route) => (
         <SidebarItem
           key={route.href}
@@ -26,37 +26,37 @@ const SidebarRoutes = () => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default SidebarRoutes;
+export default SidebarRoutes
 
 function SidebarItem({ icon: Icon, label, href }: SidebarItemProps) {
-  const pathname = usePathname();
-  const { setOpen } = useSidebar();
+  const pathname = usePathname()
+  const { setOpen } = useSidebar()
 
-  const isActive = pathname === href || pathname?.startsWith(`${href}/`);
+  const isActive = pathname === href || pathname?.startsWith(`${href}/`)
 
   return (
     <Link
       onClick={() => {
-        setOpen?.(false);
+        setOpen?.(false)
       }}
       href={href}
       className={cn(
-        buttonVariants({ variant: "ghost" }),
-        "justify-start py-6 px-3",
+        buttonVariants({ variant: 'ghost' }),
+        'justify-start px-3 py-6',
         isActive &&
-          "text-sky-700 bg-sky-200/20 hover:bg-sky-200/20 hover:text-sky-700"
+          'bg-sky-200/20 text-sky-700 hover:bg-sky-200/20 hover:text-sky-700'
       )}
     >
       <Icon
         className={cn(
-          "text-slate-500 h-5 w-5 mr-2 animate-spin-once",
-          isActive && "text-sky-700"
+          'mr-2 h-5 w-5 animate-spin-once text-slate-500',
+          isActive && 'text-sky-700'
         )}
       />
       {label}
     </Link>
-  );
+  )
 }
