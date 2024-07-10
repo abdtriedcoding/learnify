@@ -1,22 +1,22 @@
-"use server";
+'use server'
 
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
+import { db } from '@/lib/db'
+import { auth } from '@clerk/nextjs/server'
 
 export async function publishChapter(courseId: string, chapterId: string) {
   try {
-    const { userId } = auth();
-    if (!userId) return;
+    const { userId } = auth()
+    if (!userId) return
 
     const courseOwner = await db.course.findUnique({
       where: {
         id: courseId,
         userId: userId,
       },
-    });
+    })
 
     if (!courseOwner) {
-      return;
+      return
     }
 
     await db.chapter.update({
@@ -27,8 +27,8 @@ export async function publishChapter(courseId: string, chapterId: string) {
       data: {
         isPublished: true,
       },
-    });
+    })
   } catch (error) {
-    throw new Error("Something went wrong!");
+    throw new Error('Something went wrong!')
   }
 }
