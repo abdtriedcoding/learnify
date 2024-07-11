@@ -68,6 +68,10 @@
     "typescript": "^5"
   },
   "trustedDependencies": [
-    "@clerk/shared"
+    "@clerk/shared",
+    "@prisma/client",
+    "@prisma/engines",
+    "prisma",
+    "sharp"
   ]
 }
