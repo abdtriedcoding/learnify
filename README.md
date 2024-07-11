@@ -30,7 +30,7 @@ Key Features:
 
 ### Prerequisites
 
-**Node version 20.x.x**
+**You should have Nodejs and Bun installed on your system**
 
 ### Cloning the repository
 
@@ -41,51 +41,23 @@ git clone https://github.com/abdtriedcoding/learnify.git
 ### Install packages
 
 ```shell
-npm i
+bun i
 ```
 
-### Setup .env file
-
-
-```js
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
-
-NEXT_PUBLIC_APP_URL=
-
-DATABASE_URL=
-
-UPLOADTHING_SECRET=
-UPLOADTHING_APP_ID=
-
-STRIPE_API_KEY=
-STRIPE_WEBHOOK_SECRET=
-```
+### Setup .env file taking refrence from .env.example file
 
 ### Setup Prisma
 
 Add Database (I used Supabase)
 
 ```shell
-npx prisma generate
-npx prisma db push
+bunx prisma generate
+bunx prisma db push
 
 ```
 
 ### Start the app
 
 ```shell
-npm run dev
+bun run dev
 ```
-
-## Available commands
-
-Running commands with npm `npm run [command]`
-
-| command         | description                              |
-| :-------------- | :--------------------------------------- |
-| `dev`           | Starts a development instance of the app |
