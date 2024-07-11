@@ -1,5 +1,5 @@
 import { formatPrice } from '@/lib/format'
-import { DataCardProps } from '@/types/index'
+import { type DataCardProps } from '@/types/index'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const DataCard = ({ value, label, shouldFormat }: DataCardProps) => {

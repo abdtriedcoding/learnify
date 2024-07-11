@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import { useSidebar } from '@/context/sidebar-context'
-import { CourseSidebarItemProps } from '@/types/index'
+import { type CourseSidebarItemProps } from '@/types/index'
 import { CheckCircle, Lock, PlayCircle } from 'lucide-react'
 
 const CourseSidebarItem = ({

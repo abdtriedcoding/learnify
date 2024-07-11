@@ -1,15 +1,15 @@
-"use server";
+'use server'
 
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
+import { db } from '@/lib/db'
+import { auth } from '@clerk/nextjs/server'
 
 export async function updateCourseProgress(
   chapterId: string,
   isCompleted: boolean
 ) {
   try {
-    const { userId } = auth();
-    if (!userId) return;
+    const { userId } = auth()
+    if (!userId) return
 
     await db.userProgress.upsert({
       where: {
@@ -26,8 +26,8 @@ export async function updateCourseProgress(
         chapterId: chapterId,
         isCompleted,
       },
-    });
+    })
   } catch (error) {
-    throw new Error("Something went wrong!");
+    throw new Error('Something went wrong!')
   }
 }

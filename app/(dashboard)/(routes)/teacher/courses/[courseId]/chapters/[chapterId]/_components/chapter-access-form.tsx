@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ChapterAccessFormProps } from '@/types/index'
+import { type ChapterAccessFormProps } from '@/types/index'
 import { updateChapter } from '@/app/actions/updateChapter'
 import {
   Form,

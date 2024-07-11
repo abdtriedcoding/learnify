@@ -1,5 +1,5 @@
-import { CourseSidebarProps } from '@/types/index'
 import CourseSidebarItem from './course-sidebar-item'
+import { type CourseSidebarProps } from '@/types/index'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import CourseProgress from '@/components/course-progress'
 

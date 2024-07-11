@@ -1,5 +1,5 @@
 import { db } from '@/lib/db'
-import { GetChapterProps } from '@/types/index'
+import { type GetChapterProps } from '@/types/index'
 
 export const getChapter = async ({
   courseId,

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { db } from '@/lib/db'
-import { Metadata } from 'next'
+import { type Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { auth } from '@clerk/nextjs/server'
 import { Banner } from '@/components/banner'

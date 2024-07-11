@@ -1,5 +1,5 @@
-import { HomePageProps } from '@/types/index'
 import Categories from './_components/categories'
+import { type HomePageProps } from '@/types/index'
 import SearchInput from '@/components/search-input'
 import CoursesList from './_components/courses-list'
 import { getCourses } from '@/app/actions/getCourses'

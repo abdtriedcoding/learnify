@@ -5,8 +5,8 @@ import { formatPrice } from '@/lib/format'
 import { Badge } from '@/components/ui/badge'
 import { getBase64 } from '@/app/actions/getBlurImage'
 import CourseProgress from '@/components/course-progress'
-import { CourseCardProps, CoursesListProps } from '@/types/index'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { type CourseCardProps, type CoursesListProps } from '@/types/index'
 
 const CoursesList = async ({ items }: CoursesListProps) => {
   const images = items.map((item) => item.imageUrl)
@@ -31,8 +31,8 @@ const CoursesList = async ({ items }: CoursesListProps) => {
           blurredImage={blurImages[index] as string}
           chaptersLength={item.chapters.length}
           price={item.price!}
-          progress={item.progress!}
-          category={item?.category!}
+          progress={item.progress}
+          category={item.category!}
         />
       ))}
     </div>

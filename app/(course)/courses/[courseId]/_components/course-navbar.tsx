@@ -1,5 +1,5 @@
-import { CourseSidebarProps } from '@/types/index'
 import NavBarRoutes from '@/components/navbar-routes'
+import { type CourseSidebarProps } from '@/types/index'
 import CourseMobileSidebar from './course-mobile-sidebar'
 
 const CourseNavbar = ({

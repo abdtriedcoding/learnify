@@ -5,8 +5,8 @@ import Image from 'next/image'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { ImageFormProps } from '@/types/index'
 import { Button } from '@/components/ui/button'
+import { type ImageFormProps } from '@/types/index'
 import { FileUpload } from '@/components/file-upload'
 import { updateCourse } from '@/app/actions/updateCourse'
 import { Pencil, PlusCircle, ImageIcon } from 'lucide-react'
@@ -70,7 +70,7 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
             endpoint="courseImage"
             onChange={(url) => {
               if (url) {
-                onSubmit({ imageUrl: url })
+                void onSubmit({ imageUrl: url })
               }
             }}
           />

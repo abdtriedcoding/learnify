@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, XCircle } from 'lucide-react'
-import { CourseProgressButtonProps } from '@/types/index'
+import { type CourseProgressButtonProps } from '@/types/index'
 import { updateCourseProgress } from '@/app/actions/updateCourseProgress'
 
 const CourseProgressButton = ({

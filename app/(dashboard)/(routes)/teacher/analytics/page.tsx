@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { type Metadata } from 'next'
 import Charts from './_components/chart'
 import { redirect } from 'next/navigation'
 import { auth } from '@clerk/nextjs/server'

@@ -6,9 +6,9 @@ import toast from 'react-hot-toast'
 import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { ChapterVideoFormProps } from '@/types/index'
 import { FileUpload } from '@/components/file-upload'
 import { Pencil, PlusCircle, Video } from 'lucide-react'
+import { type ChapterVideoFormProps } from '@/types/index'
 import { updateChapter } from '@/app/actions/updateChapter'
 
 const formSchema = z.object({
@@ -77,7 +77,7 @@ const ChapterVideoForm = ({
             endpoint="chapterVideo"
             onChange={(url) => {
               if (url) {
-                onSubmit({ videoUrl: url })
+                void onSubmit({ videoUrl: url })
               }
             }}
           />

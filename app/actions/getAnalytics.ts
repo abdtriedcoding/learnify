@@ -13,7 +13,7 @@ export const getAnalytics = async (userId: string) => {
     },
   })
 
-  const grouped: { [courseTitle: string]: number } = {}
+  const grouped: Record<string, number> = {}
 
   // Contruct data in form of object
   purchases.forEach((purchase) => {

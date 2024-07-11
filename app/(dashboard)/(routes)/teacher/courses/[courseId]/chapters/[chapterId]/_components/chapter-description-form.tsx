@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { updateChapter } from '@/app/actions/updateChapter'
-import { ChapterDescriptionFormProps } from '@/types/index'
+import { type ChapterDescriptionFormProps } from '@/types/index'
 import {
   Form,
   FormControl,
@@ -37,7 +37,7 @@ const ChapterDescriptionForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || '',
+      description: initialData?.description ?? '',
     },
   })
 

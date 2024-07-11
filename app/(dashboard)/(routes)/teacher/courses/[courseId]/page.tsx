@@ -1,5 +1,5 @@
 import { db } from '@/lib/db'
-import { Metadata } from 'next'
+import { type Metadata } from 'next'
 import { Book, Pencil } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import { auth } from '@clerk/nextjs/server'

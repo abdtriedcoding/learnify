@@ -3,9 +3,10 @@
 import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
+import { type UpdateChapterProps } from '@/types'
 
 export async function updateChapter(
-  values: any,
+  values: UpdateChapterProps,
   courseId: string,
   chapterId: string
 ) {
@@ -24,6 +25,7 @@ export async function updateChapter(
       return
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { isPublished, ...value } = values
     await db.chapter.update({
       where: {

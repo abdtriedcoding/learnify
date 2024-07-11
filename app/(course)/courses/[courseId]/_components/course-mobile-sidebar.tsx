@@ -3,8 +3,8 @@
 import { SidebarOpen } from 'lucide-react'
 import CourseSidebar from './course-sidebar'
 import { Button } from '@/components/ui/button'
-import { CourseSidebarProps } from '@/types/index'
 import { useSidebar } from '@/context/sidebar-context'
+import { type CourseSidebarProps } from '@/types/index'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const CourseMobileSidebar = ({

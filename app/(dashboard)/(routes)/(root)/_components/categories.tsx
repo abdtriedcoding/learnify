@@ -2,8 +2,8 @@
 
 import qs from 'query-string'
 import { cn } from '@/lib/utils'
-import { CategoryItemProps } from '@/types/index'
 import { course_categories } from '@/constants/index'
+import { type CategoryItemProps } from '@/types/index'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 

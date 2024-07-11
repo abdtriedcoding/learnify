@@ -4,9 +4,9 @@ import Link from 'next/link'
 import * as React from 'react'
 import { PlusCircle } from 'lucide-react'
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,

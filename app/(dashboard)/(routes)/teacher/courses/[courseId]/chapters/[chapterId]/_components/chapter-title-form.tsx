@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ChapterTitleFormProps } from '@/types/index'
+import { type ChapterTitleFormProps } from '@/types/index'
 import { updateChapter } from '@/app/actions/updateChapter'
 import {
   Form,

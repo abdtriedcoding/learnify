@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Loader2, Lock } from 'lucide-react'
-import { VideoPlayerProps } from '@/types/index'
+import { type VideoPlayerProps } from '@/types/index'
 import { useConfettiStore } from '@/hooks/use-confetti-store'
 import { updateCourseProgress } from '@/app/actions/updateCourseProgress'
 

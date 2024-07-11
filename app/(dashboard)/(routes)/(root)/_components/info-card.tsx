@@ -1,4 +1,4 @@
-import { InfoCardProps } from '@/types/index'
+import { type InfoCardProps } from '@/types/index'
 
 const InfoCard = ({
   icon: Icon,

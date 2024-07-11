@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { Course } from '@prisma/client'
 import { formatPrice } from '@/lib/format'
-import { ColumnDef } from '@tanstack/react-table'
+import { type Course } from '@prisma/client'
+import { type ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, MoreHorizontal, Pencil } from 'lucide-react'
 
 import {

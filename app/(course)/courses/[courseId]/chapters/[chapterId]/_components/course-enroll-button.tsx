@@ -5,7 +5,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { formatPrice } from '@/lib/format'
 import { Button } from '@/components/ui/button'
-import { CourseEnrollButtonProps } from '@/types/index'
+import { type CourseEnrollButtonProps } from '@/types/index'
 
 const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -16,7 +16,7 @@ const CourseEnrollButton = ({ price, courseId }: CourseEnrollButtonProps) => {
 
       const response = await axios.post(`/api/checkout`, { courseId })
 
-      window.location.assign(response.data.url)
+      window.location.assign(response.data.url as string)
     } catch {
       toast.error('Something went wrong')
     } finally {

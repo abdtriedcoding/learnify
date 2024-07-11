@@ -3,8 +3,12 @@
 import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
+import { type UpdateCourseProps } from '@/types'
 
-export async function updateCourse(values: any, courseId: string) {
+export async function updateCourse(
+  values: UpdateCourseProps,
+  courseId: string
+) {
   try {
     const { userId } = auth()
     if (!userId) return

@@ -1,7 +1,7 @@
 import { db } from '@/lib/db'
 import { auth } from '@clerk/nextjs/server'
 import { userProgress } from './userProgress'
-import { CourseWithProgress, GetCourses } from '@/types/index'
+import { type CourseWithProgress, type GetCourses } from '@/types/index'
 
 export const getCourses = async ({
   title,

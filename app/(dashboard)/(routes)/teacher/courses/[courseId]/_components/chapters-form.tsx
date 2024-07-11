@@ -9,8 +9,8 @@ import ChaptersList from './chapter-list'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { ChaptersFormProps } from '@/types/index'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { type ChaptersFormProps } from '@/types/index'
 import { addChapter } from '@/app/actions/addChapter'
 import {
   Form,

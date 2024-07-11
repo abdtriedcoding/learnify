@@ -9,8 +9,8 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { DescriptionFormProps } from '@/types/index'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { type DescriptionFormProps } from '@/types/index'
 import { updateCourse } from '@/app/actions/updateCourse'
 import {
   Form,
@@ -70,7 +70,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
             !initialData.description && 'italic text-slate-500'
           )}
         >
-          {initialData.description || 'No description'}
+          {initialData.description ?? 'No description'}
         </p>
       )}
       {isEditing && (
