@@ -24,8 +24,8 @@ const CourseProgress = ({ value, variant, size }: CourseProgressProps) => {
       <p
         className={cn(
           'pt-2 text-sm font-medium text-emerald-700',
-          colorByVariant[variant || 'default'],
-          sizeByVariant[size || 'default']
+          colorByVariant[variant ?? 'default'],
+          sizeByVariant[size ?? 'default']
         )}
       >
         {Math.round(value)}% Complete

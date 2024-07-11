@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
-import { SidebarItemProps } from '@/types/index'
+import { type SidebarItemProps } from '@/types/index'
 import { useSidebar } from '@/context/sidebar-context'
 import { buttonVariants } from '@/components/ui/button'
 import { guestRoutes, teacherRoutes } from '@/constants/index'
